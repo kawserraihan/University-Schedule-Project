@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}{% endblock %}</title>
+      {% load static %}
+
+    <!-- Bootstrap core CSS-->
+    <link href="{% static '/info/bootstrap/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="{% static '/info/bootstrap/vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+    <link href="{% static '/info/bootstrap/css/sb-admin.css' %}" rel="stylesheet">
+    <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    
+
+   <!-- Custom styles for Dashboard-->
+    <link rel="stylesheet" href="{% static 'dashboardsrc/assets/css/styles.min.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'dashboardsrc/assets/images/logos/FG_ADMIN.svg' %}">
+
+    <!-- Latest compiled and minified CSS -->
+
+
+      {% block css %}
+      {% endblock %}
+      <style>
+
+        .container-fluid {
+          margin-top: 10px; /* Adjust this value to move the form higher */
+      }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid lightgray;
+            
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid lightgray;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        .add-button {
+            margin-bottom: 10px;
+        }
+        .search-field {
+            padding: 5px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        .action-buttons button {
+            padding: 5px 10px;
+        }
+        #sidebarnav a:hover {
+          text-decoration: none; /* Remove underline on hover */
+      }
+      .nav-link-hover {
+        text-decoration: none;
+        cursor: pointer; 
+      }
+      
+      
+      .nav-link-hover.active {
+        background-color: #f8f9fa; 
+        color: #000; 
+      }
+  
+      .card-title {
+        font-family: 'Ubuntu', sans-serif; /* Change to 'Ubuntu' font or desired font */
+        font-size: 24px;
+      }
+
+      .card-body {
+        font-family: 'Ubuntu', sans-serif; /* Change to 'Ubuntu' font or desired font */
+        font-size: 17px;
+      }
+  
+     #id_department {
+      width: 100%;
+      height: 48px; /* Adjust the height as needed */
+      border: 2px solid transparent;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      border-radius: 6px; /* Add rounded corners */
+      padding: 10px; /* Add padding for better spacing */
+  }
+  
+  /* Style the dropdown arrow */
+  #id_department::-ms-expand {
+      display: none;
+  }
+
+  #id_batch {
+    width: 100%;
+    height: 48px; /* Adjust the height as needed */
+    border: 2px solid transparent;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 6px; /* Add rounded corners */
+    padding: 10px; /* Add padding for better spacing */
+}
+
+/* Style the dropdown arrow */
+#id_batch::-ms-expand {
+    display: none;
+}
+#id_section {
+  width: 100%;
+  height: 48px; /* Adjust the height as needed */
+  border-radius: 6px; /* Add rounded corners */
+  padding: 10px; /* Add padding for better spacing */
+  border: 2px solid transparent;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+/* Style the dropdown arrow */
+#id_section::-ms-expand {
+  display: none;
+}
+#id_day {
+  width: 100%;
+  height: 48px; /* Adjust the height as needed */
+  border-radius: 6px; /* Add rounded corners */
+  padding: 10px; /* Add padding for better spacing */
+  border: 2px solid transparent;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+/* Style the dropdown arrow */
+#id_day::-ms-expand {
+  display: none;
+}
+  
+
+#id_classCode {
+  width: 100%;
+  height: 48px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 16px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+#id_classStart {
+  width: 100%;
+  height: 48px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 16px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+#id_classEnd {
+  width: 100%;
+  height: 48px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 16px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+#id_classSubject {
+  width: 100%;
+  height: 48px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 16px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+#id_classRoom {
+  width: 100%;
+  height: 48px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 16px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+#id_teacherInit {
+  width: 100%;
+  height: 48px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 16px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.btn-submit {
+  display: block;
+  margin-top: 20px; /* Adjust this value to move the button lower */
+  margin-left: auto; /* Move the button to the right side */
+}
+
+    </style>
+
+  </head>
+
+
+  <body id="page-top">
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6"
+    data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll -->
+        <div>
+            <div class="brand-logo d-flex align-items-center" >
+                <a href="{% url 'index' %}" class="text-nowrap logo-img align-items-center">
+                    <img src="{% static 'dashboardsrc/assets/images/logos/FG_ADMIN.svg' %}" width="40" alt="Logo" />
+                </a>  <span><h2>Admin</h2></span>
+                <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                    <i class="ti ti-x fs-8"></i>
+                </div>
+            </div>
+            <!-- Sidebar navigation -->
+            <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                <ul id="sidebarnav">
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Home</span>
+                    </li>
+  
+            
+        {% if request.user.is_student %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'dashboard' request.user.student.USN %}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span> Dashboard</span>
+          </a>
+        </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'attendance' request.user.student.USN %}">
+                <span> Attendance</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'attendance' request.user.student.USN %}">
+                <span> Attendance By Subject</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'marks_list' request.user.student.USN %}">
+                <span> Marks</span>
+              </a>
+            </li>
+              <li class="nav-item">
+              <a class="nav-link" href="{% url 'timetable' request.user.student.class_id_id %}">
+                <span> Time Table</span>
+              </a>
+            </li>
+
+        {% elif request.user.is_teacher %}
+        <li class="sidebar-item">
+          <a class="sidebar-link nav-link-hover" href="{% url 'dashboard' request.user.teacher.id %}" aria-expanded="false">
+              <span>
+                  <i class="ti ti-layout-dashboard"></i>
+              </span>
+              <span class="hide-menu">Dashboard</span>
+          </a>
+      </li>
+      <li class="sidebar-item">
+        <a class="sidebar-link nav-link-hover" href="{% url 'classes' request.user.teacher.id %}" aria-expanded="false">
+            <span>
+                <i class="ti ti-layout-dashboard"></i>
+            </span>
+            <span class="hide-menu">Classes</span>
+        </a>
+    </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{% url 't_clas' request.user.teacher.id 1 %}" aria-expanded="false">
+                <i class="fas fa-address-book"></i>
+                <span>Attendance</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{% url 't_clas' request.user.teacher.id 2 %}" aria-expanded="false">
+                <i class="fas fa-clipboard"></i>
+                <span>Marks</span>
+              </a>
+            </li>
+              <li class="nav-item">
+              <a class="nav-link" href="{% url 't_timetable' request.user.teacher.id %}">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Time Table</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 't_clas' request.user.teacher.id 3 %}">
+                <span>Reports</span>
+              </a>
+            </li>
+        {% endif %}
+      </ul>
+
+
+    </aside>
+
+      <div class="body-wrapper">
+        <div>
+          <nav class="navbar navbar-expand-lg navbar-light">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item dropdown">
+                      <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                          <img src="{% static 'dashboardsrc/assets/images/profile/user-1.jpg' %}" alt="Profile Picture"
+                              width="35" height="35" class="rounded-circle">
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                          <div class="message-body">
+                              <a href="{% url 'logout' %}" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                          </div>
+                      </div>
+                  </li>
+              </ul>
+          </nav>
+        </div>
+      
+
+     
+
+          <!-- Breadcrumbs-->
+{#          <ol class="breadcrumb">#}
+{#            <li class="breadcrumb-item">#}
+{#              <a href="index.html">Dashboard</a>#}
+{#            </li>#}
+{#            <li class="breadcrumb-item active">Blank Page</li>#}
+{#          </ol>#}
+
+          <!-- Page Content -->
+          {% block content %}
+          {% endblock %}
+
+        </div>
+        
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+{#        <footer class="sticky-footer">#}
+{#          <div class="container my-auto">#}
+{#            <div class="copyright text-center my-auto">#}
+{#              <span>Copyright © Your Website 2018</span>#}
+{#            </div>#}
+{#          </div>#}
+{#        </footer>#}
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+    
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="/accounts/logout">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript-->
+    
+    
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static '/info/bootstrap/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static '/info/bootstrap/js/sb-admin.min.js' %}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!--Custom scrip for the Dashboardd-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'dashboardsrc/assets/libs/jquery/dist/jquery.js' %}"></script>
+    <script src="{% static 'dashboardsrc/assets/libs/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'dashboardsrc/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'dashboardsrc/assets/js/sidebarmenu.js' %}"></script>
+    <script src="{% static 'dashboardsrc/assets/js/app.min.js' %}"></script>
+    <script src="{% static 'dashboardsrc/assets/libs/apexcharts/dist/apexcharts.min.js' %}"></script>
+    <script src="{% static 'dashboardsrc/assets/libs/simplebar/dist/simplebar.js' %}"></script>
+    <script src="{% static 'dashboardsrc/assets/js/dashboard.js' %}"></script>
+
+    <!--Online plugins-->
+   
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+
+   {% block scripts %}
+    {% endblock %}
+  </body>
+
+</html>

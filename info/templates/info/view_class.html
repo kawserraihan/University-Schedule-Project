@@ -1,0 +1,53 @@
+{% extends 'info/base.html' %}
+{% block content %}
+
+
+
+            <div class="modal-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Department</th>
+                            <td>{{ class_instance.department }}</td>
+                        </tr>
+                        <tr>
+                            <th>Batch</th>
+                            <td>{{ class_instance.batch }}</td>
+                        </tr>
+                        <tr>
+                            <th>Section</th>
+                            <td>{{ class_instance.section }}</td>
+                        </tr>
+                        <tr>
+                            <th>Day</th>
+                            <td>{{ class_instance.day }}</td>
+                        </tr>
+                        <tr>
+                            <th>Class Code</th>
+                            <td>{{ class_instance.classCode }}</td>
+                        </tr>
+                        <tr>
+                            <th>Subject</th>
+                            <td>{{ class_instance.classSubject }}</td>
+                        </tr>
+                        <tr>
+                            <th>Class Start</th>
+                            <td>{{ class_instance.classStart }}</td>
+                        </tr>
+                        <tr>
+                            <th>Class End</th>
+                            <td>{{ class_instance.classEnd }}</td>
+                        </tr>
+                        <tr>
+                            <th>Teacher</th>
+                            <td>{{ class_instance.teacherInit }}</td>
+                        </tr>
+                        <!-- Add more fields here -->
+                    </tbody>
+                </table>
+            </div>
+            
+
+
+
+    {% endblock %}
