@@ -1,5 +1,6 @@
 from django.db import models
 import math
+from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save, post_delete
@@ -190,7 +191,6 @@ class ClassDetails(models.Model):
         
 
 
-@receiver(post_save, sender=ClassDetails)
 def update_firestore(sender, instance, **kwargs):
     db = firestore.client()
     doc_ref = db.collection('your_firestore_collection').document(str(instance.id))

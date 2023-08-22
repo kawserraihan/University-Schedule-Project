@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'jy8c-n9y=pf##!2^jae-l_5iafq6q%wfq8gdb6c0r5d52su+9y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -87,14 +87,13 @@ WSGI_APPLICATION = 'CollegeERP.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'college_erp',
+        'NAME' : 'railway',
         'USER' : 'root',
-        'PASSWORD' : '',
-        'HOST' : 'localhost',     
-        'PORT' : "3306",
+        'PASSWORD' : 'oTeOZUIjvbRIej7HylTC',
+        'HOST' : 'containers-us-west-142.railway.app',  
+        'PORT' : '6468'
         },
     }
-
 
 
 # Password validation
