@@ -1,6 +1,5 @@
 from django.db import models
 import math
-from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save, post_delete
@@ -11,9 +10,9 @@ from firebase_admin import firestore
 
 
 
-#cred = credentials.Certificate("D:\Kawser\College ERP\College-ERP-master\CollegeERP\serviceAccounts.json")
-#firebase_admin.initialize_app(cred)
-#dbFire = firestore.client()
+cred = credentials.Certificate("D:\Kawser\College ERP\College-ERP-master\CollegeERP\serviceAccounts.json")
+firebase_admin.initialize_app(cred)
+dbFire = firestore.client()
 
 # Create your models here.
 sex_choice = (
@@ -83,7 +82,7 @@ class Dept(models.Model):
             
             'name': self.name,
         }
- #       dbFire.collection('Department').document(self.name).set(dept_data)
+        dbFire.collection('Department').document(self.name).set(dept_data)
 
 class Batch(models.Model):
     
@@ -101,7 +100,7 @@ class Batch(models.Model):
             'name': self.name,
             'department_id': self.department.name,
         }
-    #    dbFire.collection('Department').document(self.department.name).collection('Batch').document(self.name).set(batch_data)
+        dbFire.collection('Department').document(self.department.name).collection('Batch').document(self.name).set(batch_data)
 
 class Section(models.Model):
     
@@ -123,7 +122,7 @@ class Section(models.Model):
             'name': self.name,
             'batch_id': self.batch.name,
         }
-      #  dbFire.collection('Department').document(self.batch.department.name).collection('Batch').document(self.batch.name).collection('Section').document(self.name).set(section_data)
+        dbFire.collection('Department').document(self.batch.department.name).collection('Batch').document(self.batch.name).collection('Section').document(self.name).set(section_data)
 
 class Day(models.Model):
     
@@ -141,7 +140,7 @@ class Day(models.Model):
             'name': self.name,
             'section_id': self.section.name,
         }
-       # dbFire.collection('Department').document(self.section.batch.department.name).collection('Batch').document(self.section.batch.name).collection('Section').document(self.section.name).collection('Day').document(self.name).set(day_data)
+        dbFire.collection('Department').document(self.section.batch.department.name).collection('Batch').document(self.section.batch.name).collection('Section').document(self.section.name).collection('Day').document(self.name).set(day_data)
 
 class ClassDetails(models.Model):
     department = models.ForeignKey(Dept, on_delete=models.CASCADE)
@@ -174,32 +173,24 @@ class ClassDetails(models.Model):
             
         }
 
-    #    doc_ref = dbFire.collection('Department').document(self.day.section.batch.department.name)\
-     #                .collection('Batch').document(self.day.section.batch.name)\
-      #               .collection('Section').document(self.day.section.name)\
-       #              .collection('Day').document(self.day.name)
+        doc_ref = dbFire.collection('Department').document(self.day.section.batch.department.name)\
+                     .collection('Batch').document(self.day.section.batch.name)\
+                     .collection('Section').document(self.day.section.name)\
+                     .collection('Day').document(self.day.name)
 
-   #     doc = doc_ref.get()  # Retrieve the document snapshot
-    #    data = doc.to_dict()  # Convert the snapshot to a dictionary
-     #   existing_array = data.get('classItemList', [])  # Retrieve existing array or use an empty list
+        doc = doc_ref.get()  # Retrieve the document snapshot
+        data = doc.to_dict()  # Convert the snapshot to a dictionary
+        existing_array = data.get('classItemList', [])  # Retrieve existing array or use an empty list
 
     # Append the new class details data
- #       existing_array.append(class_data)
+        existing_array.append(class_data)
 
     # Update the array field in Firestore
-  #      doc_ref.update({'classItemList': existing_array})
+        doc_ref.update({'classItemList': existing_array})
         
 
-"""
-def update_firestore(sender, instance, **kwargs):
-    db = firestore.client()
-    doc_ref = db.collection('your_firestore_collection').document(str(instance.id))
-    doc_ref.update({
-        'field_to_update': instance.field_to_update,
-        # Update other fields as needed
-    })
-    
-"""
+
+
         
 class Course(models.Model):
     dept = models.ForeignKey(Dept, on_delete=models.CASCADE)

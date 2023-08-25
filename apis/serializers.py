@@ -1,7 +1,8 @@
-from rest_framework import serializers
+
 
 from info.models import *
-
+from rest_framework import serializers
+from info.models import Batch
 
 class DetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,3 +26,9 @@ class TimeTableSerializer(serializers.ModelSerializer):
     class Meta:
         model = AssignTime
         fields = '__all__'
+        
+
+class BatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Batch
+        fields = ['id', 'name']

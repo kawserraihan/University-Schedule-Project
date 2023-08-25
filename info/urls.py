@@ -3,6 +3,7 @@ from . import views
 from django.contrib import admin
 
 
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('student/<slug:stud_id>/attendance/',
@@ -67,6 +68,7 @@ urlpatterns = [
     path('api/auth/', include('djoser.urls')),
     path('add-teacher/', views.add_teacher, name='add_teacher'),
     path('add-student/', views.add_student, name='add_student'),
+    
     
 ]
 admin.site.site_url = None

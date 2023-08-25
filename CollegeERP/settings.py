@@ -28,7 +28,7 @@ SECRET_KEY = 'jy8c-n9y=pf##!2^jae-l_5iafq6q%wfq8gdb6c0r5d52su+9y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'info.User'
 
@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'djoser',
-    'rest_framework.authtoken',
     'apis',
 
 ]
@@ -87,13 +86,14 @@ WSGI_APPLICATION = 'CollegeERP.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'railway',
+        'NAME' : 'college_erp',
         'USER' : 'root',
-        'PASSWORD' : 'oTeOZUIjvbRIej7HylTC',
-        'HOST' : 'containers-us-west-142.railway.app',  
-        'PORT' : '6468'
+        'PASSWORD' : '',
+        'HOST' : 'localhost',     
+        'PORT' : "3306",
         },
     }
+
 
 
 # Password validation
@@ -139,6 +139,7 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = '/'
 
+"""
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -148,3 +149,4 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ),
 }
+"""

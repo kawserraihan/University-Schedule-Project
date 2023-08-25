@@ -6,7 +6,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('info.urls')),
     path('info/', include('info.urls')),
-    path('api/', include('apis.urls')),
+    path('api/019/', include('apis.urls')),
     path('accounts/login/',
          auth_views.LoginView.as_view(template_name='info/login.html'), name='login'),
     path('accounts/logout/',
