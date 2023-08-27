@@ -35,8 +35,8 @@
         <tbody>
             {% for class_detail in class_details %}
             <tr>
-                <td></td>
                 
+                <td>{{ forloop.counter }}</td>
                 <td>{{ class_detail.department }}</td>
                 <td>{{ class_detail.batch }}</td>
                 <td>{{ class_detail.section }}</td>

@@ -68,14 +68,6 @@ class Dept(models.Model):
     def __str__(self):
         return self.name
     
-    def save(self, *args, **kwargs):
-        super(Dept, self).save(*args, **kwargs)
-
-        # After saving the instance, insert data into Firestore
-        dept_data = {
-            
-            'name': self.name,
-        }
         
 
 class Batch(models.Model):
@@ -86,62 +78,32 @@ class Batch(models.Model):
     def __str__(self):
         return self.name
     
-    def save(self, *args, **kwargs):
-        super(Batch, self).save(*args, **kwargs)
 
-        batch_data = {
-            
-            'name': self.name,
-            'department_id': self.department.name,
-        }
-        
 
 class Section(models.Model):
     
     name = models.CharField(max_length=200, default="A")
     batch = models.ForeignKey(Batch, on_delete=models.CASCADE)
+    department = models.ForeignKey(Dept, on_delete=models.CASCADE, editable=False, blank=True, null=True)
 
+    def save(self, *args, **kwargs):
+        if not self.department:
+            self.department = self.batch.department
+        super().save(*args, **kwargs)
+    
+    
     def __str__(self):
         return self.name
     
-    def save(self, *args, **kwargs):
-        created = not self.pk
-        super(Section, self).save(*args, **kwargs)
-        if created:
-            days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"]
-            for day in days:
-                Day.objects.create(section=self, name=day)
-        section_data = {
-            
-            'name': self.name,
-            'batch_id': self.batch.name,
-        }
-        
 
-class Day(models.Model):
-    
-    name = models.CharField(max_length=200, default=None)
-    section = models.ForeignKey(Section, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
-    
-    def save(self, *args, **kwargs):
-        super(Day, self).save(*args, **kwargs)
-
-        day_data = {
-           
-            'name': self.name,
-            'section_id': self.section.name,
-        }
-        
 
 class ClassDetails(models.Model):
     department = models.ForeignKey(Dept, on_delete=models.CASCADE)
     batch = models.ForeignKey(Batch, on_delete=models.CASCADE)
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
     classCode = models.CharField(max_length=200, default=None)  # Change "name" to "classCode"
-    day = models.ForeignKey(Day, on_delete=models.CASCADE, default=None)
+    day = models.CharField(max_length=200, default=None)
     classSubject = models.CharField(max_length=200, default=None)
     classRoom = models.CharField(max_length=200, default=None)
     classStart = models.TimeField(default=None)
@@ -153,20 +115,7 @@ class ClassDetails(models.Model):
         return self.classCode
     
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-        class_data = {
-            'classCode': self.classCode,
-            #'day': self.day.name,
-            'classSubject': self.classSubject,
-            'classRoom': self.classRoom,
-            'classStart': self.classStart.strftime('%H:%M'),  # Convert time to string
-            'classEnd': self.classEnd.strftime('%H:%M'),    # Convert time to string
-            'teacherInit': self.teacherInit
-            
-        }
-
+    
        
         
 

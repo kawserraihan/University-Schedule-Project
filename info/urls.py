@@ -3,7 +3,6 @@ from . import views
 from django.contrib import admin
 
 
-
 urlpatterns = [
     path('', views.index, name='index'),
     path('student/<slug:stud_id>/attendance/',
@@ -14,11 +13,8 @@ urlpatterns = [
          views.dashboard, name='dashboard'),
     path('student/<slug:class_id>/timetable/',
          views.timetable, name='timetable'),
-    # path('student/<slug:class_id>/search/', views.student_search, name='student_search'),
-
     path('student/<slug:stud_id>/marks_list/',
          views.marks_list, name='marks_list'),
-
     path('teacher/<slug:teacher_id>/<int:choice>/Classes/',
          views.t_clas, name='t_clas'),
     path('teacher/<int:assign_id>/Students/attendance/',
@@ -45,16 +41,13 @@ urlpatterns = [
     path('teacher/<slug:teacher_id>/add_class_form/', views.add_class, name='add_class'),
     path('get_batches/', views.get_batches, name='get_batches'),
     path('get_sections/', views.get_sections, name='get_sections'),
-    path('get_days/', views.get_days, name='get_days'),
     path('teacher/<slug:teacher_id>/classes/<int:class_id>/', views.view_class, name='view_class'),
     path('teacher/<slug:teacher_id>/classes/<int:class_id>/edit/', views.edit_class, name='edit_class'),
     path('teacher/<slug:teacher_id>/classes/<int:class_id>/delete/', views.delete_class, name='delete_class'),
-
     path('teacher/<slug:teacher_id>/t_timetable/',
          views.t_timetable, name='t_timetable'),
     path('teacher/<int:asst_id>/Free_teachers/',
          views.free_teachers, name='free_teachers'),
-
     path('teacher/<int:assign_id>/marks_list/',
          views.t_marks_list, name='t_marks_list'),
     path('teacher/<int:assign_id>/Students/Marks/',

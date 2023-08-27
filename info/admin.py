@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.urls import path
 
 from .models import Dept, Class, Student, Attendance, Course, Teacher, Assign, AssignTime, AttendanceClass
-from .models import StudentCourse, Marks, User, AttendanceRange, Batch, Section, Day, ClassDetails
+from .models import StudentCourse, Marks, User, AttendanceRange, Batch, Section, ClassDetails
 
 
 # Register your models here.
@@ -44,10 +44,6 @@ class BatchAdmin(admin.ModelAdmin):
 #@admin.register(Section)
 class SectionAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'batch')
-
-#@admin.register(Day)
-class DayAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'section')
 
 #@admin.register(ClassDetails)
 class ClassDetailsAdmin(admin.ModelAdmin):
@@ -162,5 +158,4 @@ admin.site.register(StudentCourse, StudentCourseAdmin)
 admin.site.register(AttendanceClass, AttendanceClassAdmin)
 admin.site.register(Batch, BatchAdmin)
 admin.site.register(Section, SectionAdmin)
-admin.site.register(Day, DayAdmin)
 admin.site.register(ClassDetails, ClassDetailsAdmin)

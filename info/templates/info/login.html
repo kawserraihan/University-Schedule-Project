@@ -20,104 +20,271 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.9/typicons.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,700">
 
   <!-- Custom styles for this template -->
   <style>
     body {
         margin: 0;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: left;
+        align-items: left;
         height: 100vh;
-        background-color: #e6ffff;
+        background: linear-gradient(90deg, #C7C5F4, #776BCC);
     }
     
-    .center-container {
-        width: 100%;
+   
+    
+    .screen {
+        background: linear-gradient(90deg, #5D54A4, #7C78B8);
+        position: relative;
+        height: 600px;
+        width: 360px;
+        box-shadow: 0px 0px 24px #5C5696;
+    }
+
+    .screen__content {
+        z-index: 1;
+        position: relative;
+        height: 100%;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
-    
-    .login-box {
-        width: 300px;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+
+    .screen__background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        clip-path: inset(0 0 0 0);
     }
-    
-    .custom-header {
-        font-size: 20px;
-        margin-bottom: 20px;
+
+    .screen__background__shape {
+        transform: rotate(45deg);
+        position: absolute;
     }
-    
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
+
+    .screen__background__shape1 {
+        height: 520px;
+        width: 520px;
+        background: #FFF;
+        top: -50px;
+        right: 120px;
+        border-radius: 0 72px 0 0;
     }
-    
-    .form-control {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
+
+    .screen__background__shape2 {
+        height: 220px;
+        width: 220px;
+        background: #6C63AC;
+        top: -172px;
+        right: 0;
+        border-radius: 32px;
     }
-    
-    .text-right a {
-        font-size: 12px;
+
+    .screen__background__shape3 {
+        height: 540px;
+        width: 190px;
+        background: linear-gradient(270deg, #5D54A4, #6A679E);
+        top: -24px;
+        right: 0;
+        border-radius: 32px;
     }
-    
-    .login100-form-btn {
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: #fff;
+
+    .screen__background__shape4 {
+        height: 400px;
+        width: 200px;
+        background: #7E7BB9;
+        top: 420px;
+        right: 50px;
+        border-radius: 60px;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Raleway, sans-serif;
+    }
+
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        
+
+    }
+
+    .screen {
+        background: linear-gradient(90deg, #5D54A4, #7C78B8);
+        position: relative;
+        height: 450px;
+        width: 360px;
+        box-shadow: 0px 0px 24px #5C5696;
+        overflow: hidden;
+    }
+
+    .screen__content {
+        z-index: 1;
+        position: relative;
+        height: 100%;
+    }
+
+    .screen__background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        clip-path: inset(0 0 0 0);
+    }
+
+    .screen__background__shape {
+        transform: rotate(45deg);
+        position: absolute;
+    }
+
+    .screen__background__shape1 {
+        height: 520px;
+        width: 520px;
+        background: #FFF;
+        top: -40px;
+        right: 120px;
+        border-radius: 0 72px 0 0;
+    }
+
+    .screen__background__shape2 {
+        height: 220px;
+        width: 220px;
+        background: #6C63AC;
+        top: -152px;
+        right: 0;
+        border-radius: 32px;
+    }
+
+    .screen__background__shape3 {
+        height: 640px;
+        width: 90px;
+        background: linear-gradient(270deg, #5D54A4, #6A679E);
+        top: -4px;
+        right: 0;
+        border-radius: 32px;
+    }
+
+    .screen__background__shape4 {
+        height: 400px;
+        width: 200px;
+        background: #7E7BB9;
+        top: 400px;
+        right: 50px;
+        border-radius: 60px;
+    }
+
+    /* Styles for username and password fields */
+    .login__input#username {
         border: none;
-        border-radius: 3px;
+        border-bottom: 2px solid #D1D1D4;
+        background: none;
+        padding: 10px;
+        padding-left: 24px;
+        font-weight: 700;
+        width: 75%;
+        transition: .2s;
+    }
+
+    .login__input#username:active,
+    .login__input#username:focus,
+    .login__input#username:hover {
+        outline: none;
+        border-bottom-color: #6A679E;
+    }
+
+    .login__input#password {
+        border: none;
+        border-bottom: 2px solid #D1D1D4;
+        background: none;
+        padding: 10px;
+        padding-left: 24px;
+        font-weight: 700;
+        width: 75%;
+        transition: .2s;
+    }
+
+    .login__input#password:active,
+    .login__input#password:focus,
+    .login__input#password:hover {
+        outline: none;
+        border-bottom-color: #6A679E;
+    }
+    .login__submit {
+        background: #4C489D; /* Change background color */
+        font-size: 14px;
+        margin-top: 30px;
+        padding: 16px 20px;
+        border-radius: 26px;
+        border: none;
+        text-transform: uppercase;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center text horizontally */
+        width: 100%;
+        color: #fff;
+        box-shadow: 0px 2px 2px #5C5696;
         cursor: pointer;
+        transition: .2s;
     }
     
-    .login100-form-btn:hover {
-        background-color: #0056b3;
+    .login__submit:hover {
+        background-color: #6A679E; /* Change hover background color */
+        color: #fff;
     }
 </style>
 
 </head>
 <body>
-    <div class="center-container">
-        <div class="login-box">
-            <h2 class="custom-header">Admin Login</h2>
-            <form class="login100-form validate-form" method="post">
-                {% csrf_token %}
-                
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input class="form-control" type="text" id="username" name="username" placeholder="Type your username">
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input class="form-control" type="password" id="password" name="password" placeholder="Type your password">
-                </div>
-                
-                
-                
-                <div class="form-group">
-                    <div class="container-login100-form-btn">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn">Login</button>
+    <div class="container">
+        <div class="screen">
+            <div class="screen__background">
+                <div class="screen__background__shape screen__background__shape1"></div>
+                <div class="screen__background__shape screen__background__shape2"></div>
+                <div class="screen__background__shape screen__background__shape3"></div>
+                <div class="screen__background__shape screen__background__shape4"></div>
+            </div>
+            <div class="screen__content">
+                <div class="login">
+                    <form class="login100-form validate-form" method="post">
+                        {% csrf_token %}
+                        <div class="login__field">
+                            <span class="login__icon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input class="login__input" type="text" id="username" name="username" placeholder="Username">
                         </div>
-                    </div>
+                        <div class="login__field">
+                            <span class="login__icon">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                            <input class="login__input" type="password" id="password" name="password" placeholder="Password">
+                        </div>
+                        <button class="login__submit">
+                            <span class="button__icon">
+                                <i class="fa fa-long-arrow-right"></i>
+                            </span>
+                            Log in
+                        </button>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-
-
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

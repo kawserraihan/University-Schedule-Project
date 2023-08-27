@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from .models import Dept, Class, Student, Attendance, Course, Teacher, Assign, AttendanceTotal, time_slots, \
-    DAYS_OF_WEEK, AssignTime, AttendanceClass, StudentCourse, Marks, MarksClass, Batch, Section, ClassDetails, Day
+    DAYS_OF_WEEK, AssignTime, AttendanceClass, StudentCourse, Marks, MarksClass, Batch, Section, ClassDetails 
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -103,9 +103,7 @@ def add_class(request, teacher_id):
     departments = Dept.objects.all()
     batches = Batch.objects.all()
     sections = Section.objects.all()
-    days = Day.objects.all()
     
-    # Similar queries for other related tables
     
     if request.method == 'POST':
         form = ClassDetailsForm(request.POST)
@@ -116,7 +114,7 @@ def add_class(request, teacher_id):
     else:
         form = ClassDetailsForm()
     
-    context = {'form': form, 'departments': departments, 'batches': batches, 'sections':sections, 'days':days}
+    context = {'form': form, 'departments': departments, 'batches': batches, 'sections':sections, 'days_of_week': DAYS_OF_WEEK}
     return render(request, 'info/add_class_form.html', context)
 
 
@@ -135,15 +133,6 @@ def get_sections(request):
     for section in sections:
         section_options += f'<option value="{section.id}">{section.name}</option>'
     return JsonResponse(section_options, safe=False)
-
-
-def get_days(request):
-    section_id = request.GET.get('section_id')
-    days = Day.objects.filter(section_id=section_id)
-    day_options = '<option value="">Select a day</option>'
-    for day in days:
-        day_options += f'<option value="{day.id}">{day.name}</option>'
-    return JsonResponse(day_options, safe=False)
  
 
 @login_required

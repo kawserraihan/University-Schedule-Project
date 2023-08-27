@@ -19,12 +19,30 @@ import apis.serializers as api_ser
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect
 
-from apis.serializers import BatchSerializer
+from apis.serializers import BatchSerializer, SectionSerializer, ClassDetailsSerializer
 
 class BatchListByDept(APIView):
     def get(self, request, dept_id):
-        batches = Batch.objects.filter(department__id=dept_id)
+        batches = Batch.objects.filter(department_id=dept_id)
         serializer = BatchSerializer(batches, many=True)
         return JsonResponse(serializer.data, safe=False)
     
 
+class SectionByDept(APIView):
+    def get(self, request, dept_id, batch_id):
+        try:
+            section = Section.objects.filter(department_id = dept_id, batch_id = batch_id)
+            serializer = SectionSerializer(section, many=True)
+            return JsonResponse(serializer.data, safe=False)
+        except Section.DoesNotExist:
+            return Response(status=404)
+        
+class ClassDetailsAll(APIView):
+    def get(self, request, dept_id, batch_id, section_id):
+        try:
+            
+            classdetails= ClassDetails.objects.filter(department_id = dept_id, batch_id = batch_id, section_id = section_id)
+            serializer = ClassDetailsSerializer(classdetails, many=True)
+            return JsonResponse(serializer.data, safe=False)
+        except ClassDetails.DoesNotExist:
+            return Response(status=404)

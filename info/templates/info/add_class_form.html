@@ -27,8 +27,12 @@
                     {{ form.section }}
                 </div>
                 <div class="mb-3">
-                    <label for="{{ form.day.id_for_label }}" class="form-label">Day</label>
-                    {{ form.day }}
+                    <label class="form-label">Day</label>
+                    <select name="day" class="form-select">
+                    {% for day_value, day_label in days_of_week %}
+                    <option value="{{ day_value }}">{{ day_label }}</option>
+                    {% endfor %}
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="{{ form.classCode.id_for_label }}" class="form-label">Class Code</label>
