@@ -23,7 +23,7 @@ from apis.serializers import BatchSerializer, SectionSerializer, ClassDetailsSer
 
 class BatchListByDept(APIView):
     def get(self, request, dept_id):
-        batches = Batch.objects.filter(department_id=dept_id)
+        batches = Batch.objects.filter(department__id=dept_id)
         serializer = BatchSerializer(batches, many=True)
         return JsonResponse(serializer.data, safe=False)
     
@@ -31,7 +31,7 @@ class BatchListByDept(APIView):
 class SectionByDept(APIView):
     def get(self, request, dept_id, batch_id):
         try:
-            section = Section.objects.filter(department_id = dept_id, batch_id = batch_id)
+            section = Section.objects.filter(department__id = dept_id, batch_id = batch_id)
             serializer = SectionSerializer(section, many=True)
             return JsonResponse(serializer.data, safe=False)
         except Section.DoesNotExist:
@@ -41,7 +41,7 @@ class ClassDetailsAll(APIView):
     def get(self, request, dept_id, batch_id, section_id):
         try:
             
-            classdetails= ClassDetails.objects.filter(department_id = dept_id, batch_id = batch_id, section_id = section_id)
+            classdetails= ClassDetails.objects.filter(department__id = dept_id, batch_id = batch_id, section_id = section_id)
             serializer = ClassDetailsSerializer(classdetails, many=True)
             return JsonResponse(serializer.data, safe=False)
         except ClassDetails.DoesNotExist:
