@@ -2,7 +2,7 @@
 
 from info.models import *
 from rest_framework import serializers
-from info.models import Batch
+from info.models import Batch, Dept
 
 class DetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -61,3 +61,9 @@ class ClassDetailsSerializer(serializers.ModelSerializer):
         model = ClassDetails
     #    fields = ['class_id', 'classcode', 'day', 'classsubject', 'classroom', 'classstart', 'classend', 'teacherinit' ]
         fields = ['classcode', 'day', 'classsubject', 'classroom', 'classstart', 'classend', 'teacherinit' ]
+
+class DeptSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Dept
+        fields = ["id","name"]

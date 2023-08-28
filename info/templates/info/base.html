@@ -12,204 +12,24 @@
     <title>{% block title %}{% endblock %}</title>
       {% load static %}
 
-    <!-- Bootstrap core CSS-->
-    <link href="{% static '/info/bootstrap/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+ 
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Page level plugin CSS-->
-    <link href="{% static '/info/bootstrap/vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
-    <link href="{% static '/info/bootstrap/css/sb-admin.css' %}" rel="stylesheet">
+ 
     <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet">
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
     
-
-   <!-- Custom styles for Dashboard-->
-    <link rel="stylesheet" href="{% static 'dashboardsrc/assets/css/styles.min.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'dashboardsrc/assets/images/logos/FG_ADMIN.svg' %}">
-
-    <!-- Latest compiled and minified CSS -->
+  
 
 
       {% block css %}
       {% endblock %}
       <style>
 
-        .container-fluid {
-          margin-top: 10px; /* Adjust this value to move the form higher */
-      }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            border: 1px solid lightgray;
-            
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid lightgray;
-        }
-        
-        th {
-            background-color: #f2f2f2;
-        }
-        .add-button {
-            margin-bottom: 10px;
-        }
-        .search-field {
-            padding: 5px;
-        }
-        .action-buttons {
-            display: flex;
-            gap: 5px;
-        }
-        .action-buttons button {
-            padding: 5px 10px;
-        }
-        #sidebarnav a:hover {
-          text-decoration: none; /* Remove underline on hover */
-      }
-      .nav-link-hover {
-        text-decoration: none;
-        cursor: pointer; 
-      }
       
-      
-      .nav-link-hover.active {
-        background-color: #f8f9fa; 
-        color: #000; 
-      }
-  
-      .card-title {
-        font-family: 'Ubuntu', sans-serif; /* Change to 'Ubuntu' font or desired font */
-        font-size: 24px;
-      }
-
-      .card-body {
-        font-family: 'Ubuntu', sans-serif; /* Change to 'Ubuntu' font or desired font */
-        font-size: 17px;
-      }
-  
-     #id_department {
-      width: 100%;
-      height: 48px; /* Adjust the height as needed */
-      border: 2px solid transparent;
-      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-      border-radius: 6px; /* Add rounded corners */
-      padding: 10px; /* Add padding for better spacing */
-  }
-  
-  /* Style the dropdown arrow */
-  #id_department::-ms-expand {
-      display: none;
-  }
-
-  #id_batch {
-    width: 100%;
-    height: 48px; /* Adjust the height as needed */
-    border: 2px solid transparent;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    border-radius: 6px; /* Add rounded corners */
-    padding: 10px; /* Add padding for better spacing */
-}
-
-/* Style the dropdown arrow */
-#id_batch::-ms-expand {
-    display: none;
-}
-#id_section {
-  width: 100%;
-  height: 48px; /* Adjust the height as needed */
-  border-radius: 6px; /* Add rounded corners */
-  padding: 10px; /* Add padding for better spacing */
-  border: 2px solid transparent;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-/* Style the dropdown arrow */
-#id_section::-ms-expand {
-  display: none;
-}
-#id_day {
-  width: 100%;
-  height: 48px; /* Adjust the height as needed */
-  border-radius: 6px; /* Add rounded corners */
-  padding: 10px; /* Add padding for better spacing */
-  border: 2px solid transparent;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-/* Style the dropdown arrow */
-#id_day::-ms-expand {
-  display: none;
-}
-  
-
-#id_classCode {
-  width: 100%;
-  height: 48px;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 16px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-#id_classStart {
-  width: 100%;
-  height: 48px;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 16px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-#id_classEnd {
-  width: 100%;
-  height: 48px;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 16px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-#id_classSubject {
-  width: 100%;
-  height: 48px;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 16px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-#id_classRoom {
-  width: 100%;
-  height: 48px;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 16px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-#id_teacherInit {
-  width: 100%;
-  height: 48px;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 16px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-.btn-submit {
-  display: block;
-  margin-top: 20px; /* Adjust this value to move the button lower */
-  margin-left: auto; /* Move the button to the right side */
-}
 
     </style>
 
@@ -240,34 +60,7 @@
                         <span class="hide-menu">Home</span>
                     </li>
   
-            
-        {% if request.user.is_student %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'dashboard' request.user.student.USN %}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span> Dashboard</span>
-          </a>
-        </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'attendance' request.user.student.USN %}">
-                <span> Attendance</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'attendance' request.user.student.USN %}">
-                <span> Attendance By Subject</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'marks_list' request.user.student.USN %}">
-                <span> Marks</span>
-              </a>
-            </li>
-              <li class="nav-item">
-              <a class="nav-link" href="{% url 'timetable' request.user.student.class_id_id %}">
-                <span> Time Table</span>
-              </a>
-            </li>
+ 
 
         {% elif request.user.is_teacher %}
         <li class="sidebar-item">
@@ -286,18 +79,6 @@
             <span class="hide-menu">Classes</span>
         </a>
     </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{% url 't_clas' request.user.teacher.id 1 %}" aria-expanded="false">
-                <i class="fas fa-address-book"></i>
-                <span>Attendance</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{% url 't_clas' request.user.teacher.id 2 %}" aria-expanded="false">
-                <i class="fas fa-clipboard"></i>
-                <span>Marks</span>
-              </a>
-            </li>
               <li class="nav-item">
               <a class="nav-link" href="{% url 't_timetable' request.user.teacher.id %}">
                 <i class="fas fa-calendar-alt"></i>
@@ -394,30 +175,8 @@
     </div>
 
 
-    <!-- Bootstrap core JavaScript-->
-    
-    
 
-    <!-- Core plugin JavaScript-->
-    <script src="{% static '/info/bootstrap/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="{% static '/info/bootstrap/js/sb-admin.min.js' %}"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!--Custom scrip for the Dashboardd-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'dashboardsrc/assets/libs/jquery/dist/jquery.js' %}"></script>
-    <script src="{% static 'dashboardsrc/assets/libs/jquery/dist/jquery.min.js' %}"></script>
-    <script src="{% static 'dashboardsrc/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'dashboardsrc/assets/js/sidebarmenu.js' %}"></script>
-    <script src="{% static 'dashboardsrc/assets/js/app.min.js' %}"></script>
-    <script src="{% static 'dashboardsrc/assets/libs/apexcharts/dist/apexcharts.min.js' %}"></script>
-    <script src="{% static 'dashboardsrc/assets/libs/simplebar/dist/simplebar.js' %}"></script>
-    <script src="{% static 'dashboardsrc/assets/js/dashboard.js' %}"></script>
-
-    <!--Online plugins-->
    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
