@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}{% endblock %}</title>
+      {% load static %}
+
+
+      {% block css %}
+      {% endblock %}
+
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="{% url 'index' %}">CollegeERP</a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+
+
+    </nav>
+
+    <div id="wrapper">
+
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+            <div class="text-center h3">
+                you have been logged out
+                <br><br>
+                <a class="btn btn-success" href="/accounts/login">login?</a>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+
+
+   {% block scripts %}
+    {% endblock %}
+  </body>
+
+</html>

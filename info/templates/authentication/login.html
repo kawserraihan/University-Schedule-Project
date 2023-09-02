@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Login</title>
+
+  {% load static %}
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto:400,700&display=swap">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.9/typicons.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,700">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="{% static 'login/login.css' %}">
+  <style>
+
+</style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="screen">
+            <div class="screen__background">
+                <div class="screen__background__shape screen__background__shape1"></div>
+                <div class="screen__background__shape screen__background__shape2"></div>
+                <div class="screen__background__shape screen__background__shape3"></div>
+                <div class="screen__background__shape screen__background__shape4"></div>
+            </div>
+            <div class="screen__content">
+                <div class="login">
+                    <form class="login100-form validate-form" method="post">
+                        {% csrf_token %}
+                        <div class="login__field">
+                            <span class="login__icon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input class="login__input" type="text" id="username" name="username" placeholder="Username">
+                        </div>
+                        <div class="login__field">
+                            <span class="login__icon">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                            <input class="login__input" type="password" id="password" name="password" placeholder="Password">
+                        </div>
+                        <button class="login__submit">
+                            <span class="button__icon">
+                                <i class="fa fa-long-arrow-right"></i>
+                            </span>
+                            Log in
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+
+
+
+
+</body>
+
+</html>
