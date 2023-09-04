@@ -3,30 +3,18 @@
 
 {% load static %}
 
-<div class="main-panel">
-    <div class="content-wrapper">
-      <div class="page-header">
-        <h3 class="page-title"> Form elements </h3>
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Forms</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Form elements</li>
-          </ol>
-        </nav>
-      </div>
-      <div class="row">
-        <div class="col-12">
+<div class="container-fluid">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title fw-semibold mb-4">Add New Class Details</h5>
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Horizontal Two column</h4>
-            <form class="form-sample" method="post">
+            <form method="post">
                 {% csrf_token %}
-                <p class="card-description"> Personal info </p>
-                      <div class="row">
-                        <div class="col-md-3">
-                          <div class="form-group row">
+                <div class="mb-3">
                     <label for="{{ form.department.id_for_label }}" class="form-label">Department</label>
-                <div class="col-sm-9">
+                <div>
                         {{ form.department }}                  
                 </div>
                 </div>
@@ -71,17 +59,12 @@
                     {{ form.teacherInit }}
                 </div>
                 <button type="submit" class="btn btn-primary btn-submit">Submit</button>
-            </div>
+            </form>
         </div>
-      </div>
-  </form>
+    </div>
 </div>
 </div>
 </div>
-</div>
-
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

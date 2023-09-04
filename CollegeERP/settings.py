@@ -89,11 +89,11 @@ WSGI_APPLICATION = 'CollegeERP.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'railway',
+        'NAME' : 'college_erp',
         'USER' : 'root',
-        'PASSWORD' : 'oTeOZUIjvbRIej7HylTC',
-        'HOST' : 'containers-us-west-142.railway.app',
-        'PORT' : "6468",
+        'PASSWORD' : '',
+        'HOST' : 'localhost',     
+        'PORT' : "3306",
         },
     }
 
