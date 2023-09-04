@@ -16,3 +16,4 @@ if (localStorage.getItem("theme") === "dark") {
 function toggleMneu() {
   mysidebar.classList.toggle("shrink_sidebar");
 }
+
