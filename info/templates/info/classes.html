@@ -7,16 +7,23 @@
 
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> Basic Tables </h3>
+        <h3 class="page-title">
+          <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-calendar-multiple-check"></i>
+          </span> Class Details
+        </h3>
       </div>
       <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Class Details</h4>
               <div class="col-md-4">
-                <a href="#">Add</a>
+
+                <form>
+                <a href="{% url 'add_class' request.user.teacher.id %}" class="add btn btn-gradient-primary font-weight-bold todo-list-add-btn">Add</a>
               </div>
+            </form>
+              
               <table class="table table-striped">
                 <thead>
                   <tr>

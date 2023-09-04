@@ -1,67 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Student Companion">
+    <meta name="author" content="Kawser Raihan">
 
-    <title>{% block title %}{% endblock %}</title>
-      {% load static %}
-
-
-      {% block css %}
-      {% endblock %}
-
+    <title>Students Companion</title>
+    <!-- plugins:css -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css'%}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="{% static 'assets/images/dashboard/FG_ADMIN.svg'%}" />
   </head>
+  <body>
 
-  <body id="page-top">
-
-    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-
-      <a class="navbar-brand mr-1" href="{% url 'index' %}">CollegeERP</a>
-
-      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-        <i class="fas fa-bars"></i>
-      </button>
-
-
-    </nav>
-
-    <div id="wrapper">
-
-
-      <div id="content-wrapper">
-
-        <div class="container-fluid">
-
-            <div class="text-center h3">
-                you have been logged out
-                <br><br>
-                <a class="btn btn-success" href="/accounts/login">login?</a>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center text-center error-page bg-info">
+          <div class="row flex-grow">
+            <div class="col-lg-7 mx-auto text-white">
+              <div class="row align-items-center d-flex flex-row">
+                <div>
+                  <h2 class="display-1 mb-0">See you soon!</h2>
+                </div>
+  
+              </div>
+              <div class="row mt-5">
+                <div class="col-12 text-center mt-xl-2">
+                  <a class="text-white font-weight-medium large-text" href="/accounts/login" style="font-size: 24px;">Login again?</a>
+                </div>
+              </div>
+              <div class="row mt-5">
+                <div class="col-12 mt-xl-2">
+                  <p class="text-white font-weight-medium text-center">Copyright &copy; 2021 All rights reserved.</p>
+                </div>
+              </div>
             </div>
-
+          </div>
         </div>
-        <!-- /.container-fluid -->
-
+        <!-- content-wrapper ends -->
       </div>
-      <!-- /.content-wrapper -->
-
+      <!-- page-body-wrapper ends -->
     </div>
-    <!-- /#wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
-
-
 
    {% block scripts %}
     {% endblock %}
+    <script src="{% static 'assets/vendors/js/vendor.bundle.base.js'%}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="{% static 'assets/vendors/chart.js/Chart.min.js'%}"></script>
+    <script src="{% static 'assets/js/jquery.cookie.js'%}" type="text/javascript"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{% static 'assets/js/off-canvas.js'%}"></script>
+    <script src="{% static 'assets/js/hoverable-collapse.js'%}"></script>
+    <script src="{% static 'assets/js/misc.js'%}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="{% static 'assets/js/dashboard.js'%}"></script>
+    <script src="{% static 'assets/js/todolist.js'%}"></script>
+    <!-- End custom js for this page -->
   </body>
-
 </html>

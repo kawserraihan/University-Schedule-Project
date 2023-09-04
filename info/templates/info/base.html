@@ -9,19 +9,19 @@
     <meta name="author" content="Kawser Raihan">
 
     <title>Students Companion</title>
-    <!-- plugins:css -->
+    
     {% load static %}
+
+<!-- Template Plugins -->
+
     <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css'%}">
     <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css'%}">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
-    <!-- End layout styles -->
     <link rel="shortcut icon" href="{% static 'assets/images/dashboard/FG_ADMIN.svg'%}" />
+  
+<!-- End of Template Plugins -->
+
+
   </head>
   <body>
     <div class="container-scroller">
@@ -58,13 +58,13 @@
               </a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{% url 'logout' %}">
                   <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
               </div>
             </li>
             <li class="nav-item d-none d-lg-block full-screen-link">
-              <a class="nav-link">
-                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              <a class="nav-link" href="{% url 'logout' %}">
+                <i class="mdi mdi-fullscreen"></i>
               </a>
             </li>
             <li class="nav-item dropdown">
