@@ -5,7 +5,7 @@
 {% load static %}
 
 
-    <div class="content-wrapper">
+    
       <div class="page-header">
         <h3 class="page-title">
           <span class="page-title-icon bg-gradient-primary text-white me-2">
@@ -21,9 +21,10 @@
 
                 <form>
                 <a href="{% url 'add_class' request.user.teacher.id %}" class="btn btn-gradient-primary btn-fw">Add</a>
-              </div>
-            </form>
               
+            </form>
+          </div>
+              <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
@@ -69,11 +70,13 @@
                 </tbody>
               </table>
             </div>
+            </div>
           </div>
         </div>
-
       </div>
-    </div>
+
+      
+    
   
   <!-- main-panel ends -->
 
