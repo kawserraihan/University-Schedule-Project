@@ -43,7 +43,7 @@
   #id_section::-ms-expand {
     display: none;
   }
-  #id_day {
+  custom-day {
     width: 100%;
     height: 48px; /* Adjust the height as needed */
     border-radius: 6px; /* Add rounded corners */
@@ -123,7 +123,6 @@
 {% load static %}
 
 
-   
       <div class="page-header">
         <h3 class="page-title"> Form elements </h3>
         <nav aria-label="breadcrumb">
@@ -133,66 +132,66 @@
           </ol>
         </nav>
       </div>
-<div class="row">
-    <div class="col-12">              
-                      <div class="card">
+      <div class="row">
+            <div class="col-12">              
+                  <div class="card">
                         <div class="card-body">
-                        <form method="post">
+                          <form method="post">
                             {% csrf_token %}
-                            <div class="mb-3 full-width-select">
+                              <div class="mb-3 full-width-select">
                                 <label for="{{ form.department.id_for_label }}" class="form-label">Department</label>
-                            <div>
+                              <div>
                                     {{ form.department }}                  
-                            </div>
-                            </div>
-                            <div class="mb-3">
+                              </div>
+                              </div>
+                              <div class="mb-3">
                                 <label for="{{ form.batch.id_for_label }}" class="form-label">Batch</label>
                                 {{ form.batch }}
-                            </div>
-                            <div class="mb-3">
+                              </div>
+                              <div class="mb-3">
                                 <label for="{{ form.section.id_for_label }}" class="form-label">Section</label>
                                 {{ form.section }}
-                            </div>
-                            <div class="mb-3">
+                              </div>
+                              <div class="mb-3 full-width-select">
                                 <label class="form-label">Day</label>
                                 <select name="day" class="form-select">
                                 {% for day_value, day_label in days_of_week %}
                                 <option value="{{ day_value }}">{{ day_label }}</option>
                                 {% endfor %}
                                 </select>
-                            </div>
-                            <div class="mb-3">
+                              </div>
+                              <div class="mb-3">
                                 <label for="{{ form.classCode.id_for_label }}" class="form-label">Class Code</label>
                                 {{ form.classCode }}
-                            </div>
-                            <div class="mb-3">
+                              </div>
+                              <div class="mb-3">
                                 <label for="{{ form.classStart.id_for_label }}" class="form-label">Class Start</label>
                                 {{ form.classStart }}
-                            </div>
-                            <div class="mb-3">
+                              </div>
+                              <div class="mb-3">
                                 <label for="{{ form.classEnd.id_for_label }}" class="form-label">Class End</label>
                                 {{ form.classEnd }}
-                            </div>
-                            <div class="mb-3">
+                              </div>
+                              <div class="mb-3">
                                 <label for="{{ form.classSubject.id_for_label }}" class="form-label">Class Subject</label>
                                 {{ form.classSubject }}
-                            </div>
-                            <div class="mb-3">
+                              </div>
+                              <div class="mb-3">
                                 <label for="{{ form.classRoom.id_for_label }}" class="form-label">Class Room</label>
                                 {{ form.classRoom }}
-                            </div>
-                            <div class="mb-3">
+                              </div>
+                              <div class="mb-3">
                                 <label for="{{ form.teacherInit.id_for_label }}" class="form-label">Teacher Init</label>
                                 {{ form.teacherInit }}
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+                              </div>
+                              <button type="submit" class="btn btn-primary btn-submit">Submit</button>
                         </form>
                     </div>
                 </div>
             </div>
             </div>
        
-   
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
 
 <script>
 $(document).ready(function () {
@@ -214,17 +213,6 @@ $(document).ready(function () {
             data: { batch_id: batchId },
             success: function (data) {
                 $("#id_section").html(data);
-            }
-        });
-    });
-
-    $("#id_section").change(function () {
-        var sectionId = $(this).val();
-        $.ajax({
-            url: "/get_days/",
-            data: { section_id: sectionId },
-            success: function (data) {
-                $("#id_day").html(data);
             }
         });
     });

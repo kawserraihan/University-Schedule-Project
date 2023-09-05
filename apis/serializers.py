@@ -41,7 +41,8 @@ class ClassDetailsSerializer(serializers.ModelSerializer):
         fields = ['classcode', 'day', 'classsubject', 'classroom', 'classstart', 'classend', 'teacherinit' ]
 
 class DeptSerializer(serializers.ModelSerializer):
-    
+    department_id = serializers.IntegerField(source='id')
+    department_name = serializers.CharField(source='name')
     class Meta:
         model = Dept
-        fields = ["id","name"]
+        fields = ["department_id","department_name"]

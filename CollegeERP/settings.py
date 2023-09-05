@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'CollegeERP.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -96,6 +96,18 @@ DATABASES = {
         'PORT' : "6468",
         },
     }
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME' : 'college_erp',
+        'USER' : 'root',
+        'PASSWORD' : '',
+        'HOST' : 'localhost',     
+        'PORT' : "3306",
+        },
+    }
+
 
 
 
