@@ -44,6 +44,8 @@ class DeptSerializer(serializers.ModelSerializer):
     department_id = serializers.IntegerField(source='id')
     department_name = serializers.CharField(source='name')
     
+    
+    
     class Meta:
         model = Dept
         fields = ["department_id","department_name"]

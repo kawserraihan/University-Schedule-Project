@@ -48,7 +48,13 @@ class SectionAdmin(admin.ModelAdmin):
 #@admin.register(ClassDetails)
 class ClassDetailsAdmin(admin.ModelAdmin):
     list_display = ('department', 'batch', 'section','classCode', 'day', 'classSubject', 'classRoom', 'classStart', 'classEnd', 'teacherInit')
-    
+
+class BusDayAdmin(admin.ModelAdmin):
+    list_display = ('day_of_week', 'day_name') 
+
+
+class BusScheduleAdmin(admin.ModelAdmin):
+    list_display = ('day', 'time_of_day', 'bus_number', 'route_name') 
 
 
 
@@ -91,3 +97,5 @@ admin.site.register(Teacher, TeacherAdmin)
 admin.site.register(Batch, BatchAdmin)
 admin.site.register(Section, SectionAdmin)
 admin.site.register(ClassDetails, ClassDetailsAdmin)
+admin.site.register(BusDay, BusDayAdmin)
+admin.site.register(BusSchedule, BusScheduleAdmin)

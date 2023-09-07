@@ -108,6 +108,33 @@ class ClassDetails(models.Model):
 
     def __str__(self):
         return self.classCode
+    
+class BusDay(models.Model):
+    DAY_CHOICES = [
+        (0, 'Sunday'),
+        (1, 'Monday'),
+        (2, 'Tuesday'),
+        (3, 'Wednesday'),
+        (4, 'Thursday'),
+        (5, 'Friday'),
+        (6, 'Saturday'),
+    ]
+
+    day_of_week = models.PositiveIntegerField(choices=DAY_CHOICES, unique=True)
+    day_name = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.day_name
+    
+
+class BusSchedule(models.Model):
+    day = models.ForeignKey(BusDay, on_delete=models.CASCADE)
+    time_of_day = models.TimeField()
+    bus_number = models.CharField(max_length=10)
+    route_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.day} - {self.time_of_day}"
 
 
         
