@@ -3,6 +3,8 @@
 from info.models import *
 from rest_framework import serializers
 from info.models import Batch, Dept
+from rest_framework.generics import ListAPIView
+from rest_framework.response import Response
 
         
 
@@ -24,21 +26,14 @@ class SectionSerializer(serializers.ModelSerializer):
         fields = ['section_id', 'section_name']
         
 class ClassDetailsSerializer(serializers.ModelSerializer):
-    #class_id = serializers.IntegerField(source='id')
-    classcode = serializers.CharField(source='classCode')
- #   day = serializers.CharField(source='day')
-    classsubject = serializers.CharField(source='classSubject')
-    classroom = serializers.CharField(source='classRoom')
-    classstart = serializers.CharField(source='classStart')
-    classend = serializers.CharField(source='classEnd')
-    teacherinit = serializers.CharField(source='teacherInit')
-    
-    
+
     
     class Meta:
         model = ClassDetails
     #    fields = ['class_id', 'classcode', 'day', 'classsubject', 'classroom', 'classstart', 'classend', 'teacherinit' ]
-        fields = ['classcode', 'day', 'classsubject', 'classroom', 'classstart', 'classend', 'teacherinit' ]
+        fields = ['classCode', 'day', 'classSubject', 'classRoom', 'classStart', 'classEnd', 'teacherInit' ]
+
+
 
 class DeptSerializer(serializers.ModelSerializer):
     department_id = serializers.IntegerField(source='id')

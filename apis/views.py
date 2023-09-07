@@ -2,6 +2,7 @@ from django.shortcuts import render
 from info.models import *
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 #from rest_framework.authtoken.models import Token
 #from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.pagination import PageNumberPagination
@@ -18,8 +19,8 @@ from django.conf import settings
 import apis.serializers as api_ser
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect
-
 from apis.serializers import BatchSerializer, SectionSerializer, ClassDetailsSerializer, DeptSerializer
+from collections import defaultdict
 
 class BatchListByDept(APIView):
     def get(self, request, dept_id):
@@ -52,3 +53,26 @@ class DepartmentAll(APIView):
         dept = Dept.objects.all()
         serializer = DeptSerializer(dept, many=True)
         return JsonResponse(serializer.data, safe=False)
+    
+
+class ClassDetailsByDayView(APIView):
+    def get(self, request, *args, **kwargs):
+        # Fetch all ClassDetails data
+        queryset = ClassDetails.objects.all()
+
+        # Group the data by 'day'
+        grouped_data = defaultdict(list)
+        for item in queryset:
+            grouped_data[item.day].append({
+                "classcode": item.classCode,
+                "classsubject": item.classSubject,
+                "classroom": item.classRoom,
+                "classstart": item.classStart,
+                "classend": item.classEnd,
+                "teacherinit": item.teacherInit,
+            })
+
+        # Convert the grouped data to the desired format
+        result = [{"day": day, "class_item": items} for day, items in grouped_data.items()]
+
+        return Response(result)
