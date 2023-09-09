@@ -76,3 +76,22 @@ class ClassDetailsByDayView(APIView):
         result = [{"day": day, "class_item": items} for day, items in grouped_data.items()]
 
         return Response(result)
+
+class BusScheduleByDayView(APIView):
+    def get(self, request, *args, **kwargs):
+        # Fetch all BusSchedule data
+        queryset = BusSchedule.objects.all()
+
+        # Group the data by 'day'
+        grouped_data = defaultdict(list)
+        for item in queryset:
+            grouped_data[item.day].append({
+                "time_of_day": item.time_of_day,
+                "bus_number": item.bus_number,
+                "route_name": item.route_name,
+            })
+
+        # Convert the grouped data to the desired format
+        result = [{"day": day.day, "bus_schedules": items} for day, items in grouped_data.items()]
+
+        return Response(result)

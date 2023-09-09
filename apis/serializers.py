@@ -44,3 +44,8 @@ class DeptSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dept
         fields = ["department_id","department_name"]
+
+class BusScheduleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BusSchedule
+        fields = '__all__'

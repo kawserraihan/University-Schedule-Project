@@ -17,6 +17,10 @@ urlpatterns = [
     path('teacher/<slug:teacher_id>/classes/<int:class_id>/edit/', views.edit_class, name='edit_class'),
     path('teacher/<slug:teacher_id>/classes/<int:class_id>/delete/', views.delete_class, name='delete_class'),
 
+    path('buses/', views.bus_day, name='buses'),
+    path('buses/<int:busday_id>/', views.busschedule, name='busschedule'),
+    path('buses/<int:busday_id>/add_bus/', views.add_busschedule, name='add_bus'),
+
 ]
 admin.site.site_url = None
 admin.site.site_header = 'My Site'

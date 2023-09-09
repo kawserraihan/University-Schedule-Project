@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from .models import *
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.shortcuts import render
-from .forms import ClassDetailsForm
+from .forms import ClassDetailsForm, BusScheduleForm
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 
@@ -65,6 +66,59 @@ def classes(request, teacher_id):
         'page_obj': page_obj
     }
     return render(request, "info/classes.html", context)
+
+
+
+def bus_day(request):
+    day_objects = BusDay.objects.all()
+
+    context = {
+        'day_objects': day_objects
+    }
+        
+    return render(request, 'bus/buses.html', context)
+
+def busschedule(request, busday_id):
+    # Get the BusDay object based on the busday_id
+    bus_day = get_object_or_404(BusDay, pk=busday_id)
+
+    # Filter BusSchedule objects based on the selected BusDay
+    schedules = BusSchedule.objects.filter(day=bus_day)
+
+    context = {
+        'schedules': schedules,
+        'busday_id': busday_id,
+    }
+
+    return render(request, "bus/busschedule.html", context)
+
+def add_busschedule(request, busday_id):
+     # Get the BusDay object based on the busday_id
+    bus_day = get_object_or_404(BusDay, pk=busday_id)
+
+    if request.method == 'POST':
+        form = BusScheduleForm(request.POST)
+        if form.is_valid():
+            # Save the BusSchedule instance with the selected BusDay
+            busschedule = form.save(commit=False)
+            busschedule.day = bus_day
+            busschedule.save()
+            
+            return redirect('busschedule', busday_id=busday_id)
+    else:
+        # Initialize the form with the selected day
+        form = BusScheduleForm(initial={'day': bus_day.id})
+    
+    # Get all available BusDay objects for the dropdown
+    days = BusDay.objects.all()
+
+    context = {
+        'form': form,
+        'bus_day': bus_day,
+        'days': days,
+    }
+
+    return render(request, "bus/add_bus.html", context)
     
 @login_required
 def add_class(request, teacher_id):

@@ -110,21 +110,12 @@ class ClassDetails(models.Model):
         return self.classCode
     
 class BusDay(models.Model):
-    DAY_CHOICES = [
-        (0, 'Sunday'),
-        (1, 'Monday'),
-        (2, 'Tuesday'),
-        (3, 'Wednesday'),
-        (4, 'Thursday'),
-        (5, 'Friday'),
-        (6, 'Saturday'),
-    ]
-
-    day_of_week = models.PositiveIntegerField(choices=DAY_CHOICES, unique=True)
-    day_name = models.CharField(max_length=10)
+    
+    day= models.CharField(max_length=10)
 
     def __str__(self):
-        return self.day_name
+        return self.day
+    
     
 
 class BusSchedule(models.Model):

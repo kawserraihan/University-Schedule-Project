@@ -1,0 +1,184 @@
+<style>
+   
+    .full-width-select {
+      width: 100%;
+    }
+    #id_department {
+        width: 100%;
+        height: 48px; /* Adjust the height as needed */
+        border: 2px solid transparent;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        border-radius: 6px; /* Add rounded corners */
+        padding: 10px; /* Add padding for better spacing */
+    }
+    
+    /* Style the dropdown arrow */
+    #id_department::-ms-expand {
+        display: none;
+    }
+  
+    #id_batch {
+      width: 100%;
+      height: 48px; /* Adjust the height as needed */
+      border: 2px solid transparent;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      border-radius: 6px; /* Add rounded corners */
+      padding: 10px; /* Add padding for better spacing */
+  }
+  
+  /* Style the dropdown arrow */
+  #id_batch::-ms-expand {
+      display: none;
+  }
+  #id_section {
+    width: 100%;
+    height: 48px; /* Adjust the height as needed */
+    border-radius: 6px; /* Add rounded corners */
+    padding: 10px; /* Add padding for better spacing */
+    border: 2px solid transparent;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  
+  /* Style the dropdown arrow */
+  #id_section::-ms-expand {
+    display: none;
+  }
+  custom-day {
+    width: 100%;
+    height: 48px; /* Adjust the height as needed */
+    border-radius: 6px; /* Add rounded corners */
+    padding: 10px; /* Add padding for better spacing */
+    border: 2px solid transparent;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  
+  /* Style the dropdown arrow */
+  #id_day::-ms-expand {
+    display: none;
+  }
+    
+  
+  #id_classCode {
+    width: 100%;
+    height: 48px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  #id_classStart {
+    width: 100%;
+    height: 48px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  #id_day {
+    width: 100%;
+    height: 48px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    cursor: not-allowed;
+    background-color: #f0f0f0;
+    color: #808080;
+    
+  }
+  
+  #id_time_of_day {
+    width: 100%;
+    height: 48px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  #id_bus_number {
+    width: 100%;
+    height: 48px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  
+  #id_route_name {
+    width: 100%;
+    height: 48px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  </style>
+
+
+{% extends 'info/base.html' %}
+{% block content %}
+
+{% load static %}
+
+
+      <div class="page-header">
+        <h3 class="page-title"> Add Schedule for {{bus_day}} </h3>
+        
+      </div>
+      <div class="row">
+            <div class="col-12">              
+                  <div class="card">
+                        <div class="card-body">
+                          <form method="post">
+                            {% csrf_token %}
+                            
+                            <div class="mb-3 full-width-select">
+                            <label for="{{ form.day.id_for_label }}" class="form-label">Day</label>
+                            <select id="{{ form.day.id_for_label }}" name="{{ form.day.name }}" class="form-select">
+                              {% for day in days %}
+                              <option value="{{ day.id }}" {% if day.id == bus_day.id %}selected{% endif %}>
+                                  {{ day.day }}
+                              </option>
+                              {% endfor %}
+                          </select>
+                      
+                            </div>
+                            <div class="mb-3 full-width-select">
+                                <label for="{{ form.time_of_day.id_for_label }}" class="form-label">Bus Time</label>
+                                {{ form.time_of_day}}
+                              </div>
+                              <div class="mb-3">
+                                <label for="{{ form.bus_number.id_for_label }}" class="form-label">Bus Number</label>
+                                {{ form.bus_number }}
+                              </div>
+                              <div class="mb-3">
+                                <label for="{{ form.route_name.id_for_label }}" class="form-label">Route</label>
+                                {{ form.route_name }}
+                              </div>
+                              
+                              <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+
+<script>
+    var myElement = document.getElementById("{{ form.day.id_for_label }}");
+        
+    myElement.style.pointerEvents = "none";
+
+</script> 
+
+
+
+        {% endblock %}

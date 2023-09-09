@@ -1,0 +1,74 @@
+{% extends 'info/base.html' %}
+{% block content %}
+    
+
+{% load static %}
+
+
+    
+      <div class="page-header">
+        <h3 class="page-title">
+          <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-calendar-multiple-check"></i>
+          </span> Bus Schedules
+        </h3>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <div class="col-md-4">
+                <form>
+                  <a href="{% url 'add_bus' busday_id=busday_id %}" class="btn btn-gradient-primary btn-fw">Add</a>
+                
+              </form>
+
+          </div>
+              <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Time</th>
+                    <th>Bus Number</th>
+                    <th>Route</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for buses in schedules %}
+                  <tr>
+
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ buses.time_of_day }}</td>
+                    <td>{{ buses.bus_number }}</td>
+                    <td>{{ buses.route_name }}</td>
+                   
+                    <td class="action-buttons">
+                      <a href="#">
+                        <img src="{% static 'assets/images/actions/view.png' %}" alt="Student Companion" /></a>
+                      <a href="#">
+                        <img src="{% static 'assets/images/actions/edit.png' %}" alt="Student Companion"/></a>
+                      <a href="">
+                      <img src="{% static 'assets/images/actions/trash.png' %}" alt="Student Companion" /></a>
+
+
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+   
+  
+  <!-- main-panel ends -->
+
+
+
+{% endblock %}

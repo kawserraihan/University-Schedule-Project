@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:dept_id>/batch/<int:batch_id>/section', api_view.SectionByDept.as_view()),
     path('<int:dept_id>/batch/<int:batch_id>/section/<int:section_id>/class', api_view.ClassDetailsByDayView.as_view()),
     path('', api_view.DepartmentAll.as_view()),
+    
 ]

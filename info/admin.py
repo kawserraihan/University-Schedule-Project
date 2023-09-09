@@ -50,7 +50,7 @@ class ClassDetailsAdmin(admin.ModelAdmin):
     list_display = ('department', 'batch', 'section','classCode', 'day', 'classSubject', 'classRoom', 'classStart', 'classEnd', 'teacherInit')
 
 class BusDayAdmin(admin.ModelAdmin):
-    list_display = ('day_of_week', 'day_name') 
+    list_display = ('id','day') 
 
 
 class BusScheduleAdmin(admin.ModelAdmin):
