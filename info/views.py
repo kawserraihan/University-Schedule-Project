@@ -78,16 +78,30 @@ def bus_day(request):
         
     return render(request, 'bus/buses.html', context)
 
-def busschedule(request, busday_id):
+def busschedule(request, routetype, busday_id):
+    # Determine the routetype_id based on the string captured in the URL
+    if routetype== "uproute":
+        routetype_id = 1
+    elif routetype == "downroute":
+        routetype_id = 2
+    else:
+        routetype_id = 0
+        # Handle other cases or provide a default value
+        routetype_id = 0  # You can change this to an appropriate default value
+
     # Get the BusDay object based on the busday_id
     bus_day = get_object_or_404(BusDay, pk=busday_id)
 
-    # Filter BusSchedule objects based on the selected BusDay
-    schedules = BusSchedule.objects.filter(day=bus_day)
+    # Get the Route object based on the determined routetype_id
+    route = get_object_or_404(Route, pk=routetype_id)
+
+    # Filter BusSchedule objects based on the selected BusDay and Route
+    schedules = BusSchedule.objects.filter(day=bus_day, route_type=route)
 
     context = {
         'schedules': schedules,
         'busday_id': busday_id,
+        'routetype_id': routetype_id,
     }
 
     return render(request, "bus/busschedule.html", context)

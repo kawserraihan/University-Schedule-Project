@@ -36,9 +36,8 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{ day.day }}</td>
                     <td class="action-buttons">
-                        <a href="{% url 'busschedule'  busday_id=day.id %}">
-                          <img src="{% static 'assets/images/actions/arrow.png' %}" alt="Student Companion" /></a>
-                     </td>
+                      <button onclick="toggleRoute('{{ day.id }}')">Toggle Route</button>
+                  </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -51,7 +50,28 @@
       </div>
 
       
-
+      <script>
+        function toggleRoute(dayId) {
+            var currentURL = window.location.pathname;
+            var currentRoute = currentURL.includes('uproute') ? 'uproute' : 'downroute';
+            var newRoute = currentRoute === 'uproute' ? 'uproute' : 'downroute';
+        
+            // Check if the current URL already contains a routetype
+            if (currentURL.includes('uproute') || currentURL.includes('downroute')) {
+                // Replace the current routetype with the new routetype
+                currentURL = currentURL.replace(currentRoute, newRoute);
+            } else {
+                // Add the new routetype to the URL
+                currentURL = currentURL + newRoute;
+            }
+        
+            // Build the new URL with the updated routetype and dayId
+            var newURL = currentURL + dayId + '/';
+        
+            // Redirect to the new URL
+            window.location.href = newURL;
+        }
+        </script>
 
   
   <!-- main-panel ends -->

@@ -115,11 +115,17 @@ class BusDay(models.Model):
 
     def __str__(self):
         return self.day
-    
+
+class Route(models.Model):
+    route_type = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.route_type   
     
 
 class BusSchedule(models.Model):
     day = models.ForeignKey(BusDay, on_delete=models.CASCADE)
+    route_type = models.ForeignKey(Route, on_delete=models.CASCADE, null=True, blank=True)
     time_of_day = models.TimeField()
     bus_number = models.CharField(max_length=10)
     route_name = models.CharField(max_length=100)

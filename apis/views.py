@@ -56,20 +56,20 @@ class DepartmentAll(APIView):
     
 
 class ClassDetailsByDayView(APIView):
-    def get(self, request, *args, **kwargs):
+    def get(self, request, dept_id, batch_id, section_id):
         # Fetch all ClassDetails data
-        queryset = ClassDetails.objects.all()
+        queryset = ClassDetails.objects.filter(department__id = dept_id, batch_id = batch_id, section_id = section_id)
 
         # Group the data by 'day'
         grouped_data = defaultdict(list)
         for item in queryset:
             grouped_data[item.day].append({
-                "classcode": item.classCode,
-                "classsubject": item.classSubject,
-                "classroom": item.classRoom,
-                "classstart": item.classStart,
-                "classend": item.classEnd,
-                "teacherinit": item.teacherInit,
+                "class_code": item.classCode,
+                "class_subject": item.classSubject,
+                "class_room": item.classRoom,
+                "class_start": item.classStart,
+                "class_end": item.classEnd,
+                "teacher_init": item.teacherInit,
             })
 
         # Convert the grouped data to the desired format

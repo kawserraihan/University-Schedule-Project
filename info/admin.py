@@ -52,9 +52,11 @@ class ClassDetailsAdmin(admin.ModelAdmin):
 class BusDayAdmin(admin.ModelAdmin):
     list_display = ('id','day') 
 
+class RouteAdmin(admin.ModelAdmin):
+    list_display = ('id','route_type') 
 
 class BusScheduleAdmin(admin.ModelAdmin):
-    list_display = ('day', 'time_of_day', 'bus_number', 'route_name') 
+    list_display = ('day', 'route_type','time_of_day', 'bus_number', 'route_name') 
 
 
 
@@ -98,4 +100,5 @@ admin.site.register(Batch, BatchAdmin)
 admin.site.register(Section, SectionAdmin)
 admin.site.register(ClassDetails, ClassDetailsAdmin)
 admin.site.register(BusDay, BusDayAdmin)
+admin.site.register(Route, RouteAdmin)
 admin.site.register(BusSchedule, BusScheduleAdmin)
