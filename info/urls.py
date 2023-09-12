@@ -20,8 +20,10 @@ urlpatterns = [
     path('buses/uproute/', views.bus_day, name='uproute'),
     path('buses/downroute/', views.bus_day, name='downroute'),
     path('buses/<str:routetype>/<int:busday_id>/', views.busschedule, name='busschedule'),
-    path('buses/<int:busday_id>/add_bus/', views.add_busschedule, name='add_bus'),
-
+    path('buses/<str:routetype>/<int:busday_id>/add_bus/', views.add_busschedule, name='add_bus'),
+    path('buses/<str:routetype>/<int:busday_id>/view/<int:busschedule_id>/', views.view_busschedule, name='view_busschedule'),
+    path('edit_busschedule/<int:busschedule_id>/', views.edit_busschedule, name='edit_busschedule'),
+    path('busschedule/delete/<int:busschedule_id>/', views.delete_busschedule, name='delete_busschedule'),
 ]
 admin.site.site_url = None
 admin.site.site_header = 'My Site'

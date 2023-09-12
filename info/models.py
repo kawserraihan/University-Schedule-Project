@@ -131,7 +131,7 @@ class BusSchedule(models.Model):
     route_name = models.CharField(max_length=100)
 
     def __str__(self):
-        return f"{self.day} - {self.time_of_day}"
+        return f"{self.day} - {self.route_type}"
 
 
         

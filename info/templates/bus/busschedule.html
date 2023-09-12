@@ -19,7 +19,7 @@
             <div class="card-body">
               <div class="col-md-4">
                 <form>
-                  <a href="{% url 'add_bus' busday_id=busday_id %}" class="btn btn-gradient-primary btn-fw">Add</a>
+                  <a href="{% url 'add_bus' routetype busday_id %}" id="add-bus-button" class="btn btn-gradient-primary btn-fw">Add</a>
                 
               </form>
 
@@ -47,11 +47,11 @@
                     <td>{{ buses.route_name }}</td>
                    
                     <td class="action-buttons">
-                      <a href="#">
+                      <a href="{% url 'view_busschedule' routetype buses.day.id buses.id %}">
                         <img src="{% static 'assets/images/actions/view.png' %}" alt="Student Companion" /></a>
-                      <a href="#">
+                      <a href="{% url 'edit_busschedule' buses.id %}">
                         <img src="{% static 'assets/images/actions/edit.png' %}" alt="Student Companion"/></a>
-                      <a href="">
+                      <a href="{% url 'delete_busschedule' buses.id %}">
                       <img src="{% static 'assets/images/actions/trash.png' %}" alt="Student Companion" /></a>
 
 
@@ -66,11 +66,11 @@
         </div>
       </div>
 
-      
-   
-  
+
+
+
+
+
   <!-- main-panel ends -->
-
-
 
 {% endblock %}

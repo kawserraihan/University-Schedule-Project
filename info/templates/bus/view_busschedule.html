@@ -1,0 +1,35 @@
+{% extends 'info/base.html' %}
+{% block content %}
+
+
+
+            <div class="modal-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Day</th>
+                            <td>{{ busschedule.day }}</td>
+                        </tr>
+                        <tr>
+                            <th>Time</th>
+                            <td>{{ busschedule.time_of_day }}</td>
+                        </tr>
+                        <tr>
+                            <th>Bus Number</th>
+                            <td>{{ busschedule.bus_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Route Name</th>
+                            <td>{{ busschedule.route_name }}</td>
+                        </tr>
+                        <tr>
+                            
+                        <!-- Add more fields here -->
+                    </tbody>
+                </table>
+            </div>
+            
+
+
+
+    {% endblock %}

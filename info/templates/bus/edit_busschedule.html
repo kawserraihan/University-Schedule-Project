@@ -1,0 +1,150 @@
+<style>
+   
+    .full-width-select {
+      width: 100%;
+    }
+    #id_department {
+        width: 100%;
+        height: 48px; /* Adjust the height as needed */
+        border: 2px solid transparent;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        border-radius: 6px; /* Add rounded corners */
+        padding: 10px; /* Add padding for better spacing */
+    }
+    
+    /* Style the dropdown arrow */
+    #id_department::-ms-expand {
+        display: none;
+    }
+  
+    #id_batch {
+      width: 100%;
+      height: 48px; /* Adjust the height as needed */
+      border: 2px solid transparent;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      border-radius: 6px; /* Add rounded corners */
+      padding: 10px; /* Add padding for better spacing */
+  }
+  
+  /* Style the dropdown arrow */
+  #id_batch::-ms-expand {
+      display: none;
+  }
+  #id_section {
+    width: 100%;
+    height: 48px; /* Adjust the height as needed */
+    border-radius: 6px; /* Add rounded corners */
+    padding: 10px; /* Add padding for better spacing */
+    border: 2px solid transparent;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  
+  /* Style the dropdown arrow */
+  #id_section::-ms-expand {
+    display: none;
+  }
+  #id_day {
+    width: 100%;
+    height: 48px; /* Adjust the height as needed */
+    border-radius: 6px; /* Add rounded corners */
+    padding: 10px; /* Add padding for better spacing */
+    border: 2px solid transparent;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  
+  /* Style the dropdown arrow */
+  #id_day::-ms-expand {
+    display: none;
+  }
+    
+  
+  #id_classCode {
+    width: 100%;
+    height: 48px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  #id_classStart {
+    width: 100%;
+    height: 48px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  #id_classEnd {
+    width: 100%;
+    height: 48px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  
+  #id_classSubject {
+    width: 100%;
+    height: 48px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  #id_classRoom {
+    width: 100%;
+    height: 48px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  
+  #id_teacherInit {
+    width: 100%;
+    height: 48px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+  </style>
+
+{% extends 'info/base.html' %}
+{% block content %}
+
+<h2>Edit Class Details</h2>
+
+<div class="page-header">
+    <h3 class="page-title"> Form elements </h3>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Forms</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Form elements</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col-12">              
+                      <div class="card">
+                        <div class="card-body">
+    <form class="form-sample" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-submit">Save Changes</button>
+        <a href="{% url 'view_busschedule' routetype=busschedule.route_type busday_id=busschedule.day.id busschedule_id=busschedule.id %}" class="btn btn-danger">Cancel</a>
+    </form>
+</div>
+</div>
+</div>
+</div>
+
+
+
+    {% endblock %}

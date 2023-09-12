@@ -9,5 +9,5 @@ class ClassDetailsForm(forms.ModelForm):
 class BusScheduleForm(forms.ModelForm):
     class Meta:
         model = BusSchedule
-        fields = ['day', 'time_of_day', 'bus_number', 'route_name']
+        fields = ['day', 'time_of_day', 'bus_number', 'route_name', 'route_type']
     day_id = forms.IntegerField(widget=forms.HiddenInput(), required=False)

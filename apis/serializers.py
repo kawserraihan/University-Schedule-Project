@@ -49,3 +49,9 @@ class BusScheduleSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusSchedule
         fields = '__all__'
+
+
+class RouteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Route
+        fields = '__all__'

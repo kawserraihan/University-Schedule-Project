@@ -19,7 +19,7 @@ from django.conf import settings
 import apis.serializers as api_ser
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect
-from apis.serializers import BatchSerializer, SectionSerializer, ClassDetailsSerializer, DeptSerializer
+from apis.serializers import BatchSerializer, SectionSerializer, ClassDetailsSerializer, DeptSerializer, RouteSerializer
 from collections import defaultdict
 
 class BatchListByDept(APIView):
@@ -77,10 +77,10 @@ class ClassDetailsByDayView(APIView):
 
         return Response(result)
 
-class BusScheduleByDayView(APIView):
+class UpRouteBusScheduleByDayView(APIView):
     def get(self, request, *args, **kwargs):
         # Fetch all BusSchedule data
-        queryset = BusSchedule.objects.all()
+        queryset = BusSchedule.objects.filter(route_type_id=1)
 
         # Group the data by 'day'
         grouped_data = defaultdict(list)
@@ -95,3 +95,30 @@ class BusScheduleByDayView(APIView):
         result = [{"day": day.day, "bus_schedules": items} for day, items in grouped_data.items()]
 
         return Response(result)
+    
+
+class DownRouteBusScheduleByDayView(APIView):
+    def get(self, request, *args, **kwargs):
+        # Fetch all BusSchedule data
+        queryset = BusSchedule.objects.filter(route_type_id=2)
+
+        # Group the data by 'day'
+        grouped_data = defaultdict(list)
+        for item in queryset:
+            grouped_data[item.day].append({
+                "time_of_day": item.time_of_day,
+                "bus_number": item.bus_number,
+                "route_name": item.route_name,
+            })
+
+        # Convert the grouped data to the desired format
+        result = [{"day": day.day, "bus_schedules": items} for day, items in grouped_data.items()]
+
+        return Response(result)
+
+
+class RouteAll(APIView):
+    def get(self,request):
+        route = Route.objects.all()
+        serializer = RouteSerializer(route, many=True)
+        return JsonResponse(serializer.data, safe=False)
