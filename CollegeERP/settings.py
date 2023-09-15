@@ -10,9 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os
-from django.conf import settings
 
+from django.conf import settings
+import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CollegeERP.settings')
 settings.configure()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -36,7 +36,7 @@ AUTH_USER_MODEL = 'info.User'
 # Application definition
 
 INSTALLED_APPS = [
-  #  "debug_toolbar",
+    "debug_toolbar",
     'whitenoise.runserver_nostatic',
     'info.apps.InfoConfig',
     'django.contrib.admin',
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
 
- #   "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -104,6 +104,7 @@ DATABASES = {
 """
 
 #For the railway id kawser.raihan9898@gmail.com
+"""
 
 DATABASES = {
     'default': {
@@ -119,7 +120,7 @@ DATABASES = {
 
 
 
-
+"""
 
 
 # Local DB
@@ -134,8 +135,21 @@ DATABASES = {
         'PORT' : "3306",
         },
     }
-
 """
+#Planet Scale
+
+DATABASES = {
+  'default': {
+    'ENGINE': 'django_psdb_engine',
+    'NAME': 'college_erp',
+    'HOST': 'aws.connect.psdb.cloud',
+    'PORT': '3306',
+    'USER': '05rwyznlrktdthb99ks9',
+    'PASSWORD': 'pscale_pw_OknuHA0RGMDWMuI3RJxTwKFt4UP7VB54sH8S1ZmBp62',
+    'OPTIONS': {'ssl': {'ca': 'cacert-2023-08-22.pem'}, 'charset': 'utf8mb4'}
+  }
+  }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -174,11 +188,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-"""
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'info', 'static'),
 ]
-"""
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 LOGIN_REDIRECT_URL = '/'
@@ -194,11 +208,9 @@ REST_FRAMEWORK = {
     ),
 }
 """
-"""
+
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
     # ...
 ]
-
-"""
