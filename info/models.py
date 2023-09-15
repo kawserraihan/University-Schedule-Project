@@ -137,6 +137,7 @@ class BusSchedule(models.Model):
         
 class Course(models.Model):
     dept = models.ForeignKey(Dept, on_delete=models.CASCADE)
+    id = models.CharField(primary_key='True', max_length=50)
     name = models.CharField(max_length=50)
     shortname = models.CharField(max_length=50, default='X')
 
@@ -146,6 +147,7 @@ class Course(models.Model):
 
 class Class(models.Model):
     # courses = models.ManyToManyField(Course, default=1)
+    id = models.CharField(primary_key='True', max_length=100)
     dept = models.ForeignKey(Dept, on_delete=models.CASCADE)
     section = models.CharField(max_length=100)
     sem = models.IntegerField()

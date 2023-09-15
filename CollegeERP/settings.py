@@ -36,7 +36,7 @@ AUTH_USER_MODEL = 'info.User'
 # Application definition
 
 INSTALLED_APPS = [
-#    "debug_toolbar",
+    "debug_toolbar",
     'whitenoise.runserver_nostatic',
     'info.apps.InfoConfig',
     'django.contrib.admin',
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
 
- #   "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -124,7 +124,7 @@ DATABASES = {
 
 
 # Local DB
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -135,22 +135,21 @@ DATABASES = {
         'PORT' : "3306",
         },
     }
-"""
-#Planet Scale
 
+#Planet Scale
+"""
 DATABASES = {
   'default': {
     'ENGINE': 'django_psdb_engine',
     'NAME': 'college_erp',
     'HOST': 'aws.connect.psdb.cloud',
     'PORT': '3306',
-    'USER': 'dtmqhpo2geyjgu1drd17',
-    'PASSWORD': 'pscale_pw_bDXhlQdWDHjHuakWPGaLPnWQzuDMkAoLf66saxg7OBf',
+    'USER': 'yv4ssraw70cbnr66dmsy',
+    'PASSWORD': 'pscale_pw_7PFrkKPcojqCEz0pQaQljSP13rRKfZBcaPc2sq8vgK6',
     'OPTIONS': {'ssl': {'ca': 'cacert-2023-08-22.pem'}, 'charset': 'utf8mb4'}
   }
   }
-
-
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -209,10 +208,9 @@ REST_FRAMEWORK = {
     ),
 }
 """
-"""
+
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
     # ...
 ]
-"""
