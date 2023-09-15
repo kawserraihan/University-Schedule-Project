@@ -144,11 +144,12 @@ DATABASES = {
     'NAME': 'college_erp',
     'HOST': 'aws.connect.psdb.cloud',
     'PORT': '3306',
-    'USER': '05rwyznlrktdthb99ks9',
-    'PASSWORD': 'pscale_pw_OknuHA0RGMDWMuI3RJxTwKFt4UP7VB54sH8S1ZmBp62',
+    'USER': 'dtmqhpo2geyjgu1drd17',
+    'PASSWORD': 'pscale_pw_bDXhlQdWDHjHuakWPGaLPnWQzuDMkAoLf66saxg7OBf',
     'OPTIONS': {'ssl': {'ca': 'cacert-2023-08-22.pem'}, 'charset': 'utf8mb4'}
   }
   }
+
 
 
 # Password validation
