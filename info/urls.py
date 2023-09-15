@@ -26,4 +26,5 @@ urlpatterns = [
     path('busschedule/delete/<int:busschedule_id>/', views.delete_busschedule, name='delete_busschedule'),
 ]
 admin.site.site_url = None
+
 admin.site.site_header = 'My Site'

@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/bus/2/route/', api_view.DownRouteBusScheduleByDayView.as_view()),
     path('api/bus/', api_view.RouteAll.as_view()),
 
+
     path('accounts/login/',
          auth_views.LoginView.as_view(template_name='authentication/login.html'), name='login'),
     path('accounts/logout/',
