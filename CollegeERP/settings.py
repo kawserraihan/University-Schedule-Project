@@ -28,7 +28,7 @@ SECRET_KEY = 'jy8c-n9y=pf##!2^jae-l_5iafq6q%wfq8gdb6c0r5d52su+9y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.vercel.app','http://127.0.0.1/','.now.sh']
 
 AUTH_USER_MODEL = 'info.User'
 
@@ -203,7 +203,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'info', 'static'),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 LOGIN_REDIRECT_URL = '/'
 
