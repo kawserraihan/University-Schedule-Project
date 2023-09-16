@@ -36,7 +36,7 @@ AUTH_USER_MODEL = 'info.User'
 # Application definition
 
 INSTALLED_APPS = [
-    "debug_toolbar",
+  #  "debug_toolbar",
     'whitenoise.runserver_nostatic',
     'info.apps.InfoConfig',
     'django.contrib.admin',
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
 
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+  #  "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -104,8 +104,8 @@ DATABASES = {
 """
 
 #For the railway id kawser.raihan9898@gmail.com
-"""
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -116,15 +116,10 @@ DATABASES = {
         'PORT' : "5516",
         },
     }
-
-
-
-
 """
 
-
 # Local DB
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -135,7 +130,7 @@ DATABASES = {
         'PORT' : "3306",
         },
     }
-
+"""
 #Planet Scale
 """
 DATABASES = {
@@ -150,6 +145,21 @@ DATABASES = {
   }
   }
 """
+
+
+#Render DB
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME' : 'college_erp',
+        'USER' : 'root',
+        'PASSWORD' : 'U4Ju4pEkVyTaumnCGXX2im4qKukdMd4a',
+        'HOST' : 'dpg-ck2a4m7qj8ts73839u5g-a.singapore-postgres.render.com',     
+        'PORT' : "5432",
+        },
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -208,9 +218,10 @@ REST_FRAMEWORK = {
     ),
 }
 """
-
+"""
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
     # ...
 ]
+"""
