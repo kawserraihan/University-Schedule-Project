@@ -1,120 +1,47 @@
-# PlanetScale CLI [![Build status](https://badge.buildkite.com/cf225eb6ccc163b365267fd8172a6e5bd9baa7c8fcdd10c77c.svg?branch=main)](https://buildkite.com/planetscale/cli)
-
-PlanetScale is more than a database and our CLI is more than a jumble of commands. The `pscale` command line tool brings branches, deploy requests, and other PlanetScale concepts to your fingertips.
-
-![PlanetScale CLI](https://user-images.githubusercontent.com/6104/191803574-be63da54-d255-4f5a-ab2d-2b49cdf7eb12.png)
-
+# University-Schedule-Project
+University Schedule management system built using Django framework. It is build to schedule and plan class routines, exam routines and bus schedules to make the life of the students easier.
 
 ## Installation
 
-#### macOS
+Python and Django need to be installed
 
-`pscale` is available via a Homebrew Tap, and as downloadable binary from the [releases](https://github.com/planetscale/cli/releases/latest) page:
-
-```
-brew install planetscale/tap/pscale
-```
-Optional: `pscale` requires the MySQL Client for certain commands. You can install it by running:
-
-```
-brew install mysql-client
+```bash
+pip install django
 ```
 
-To upgrade to the latest version:
+## Usage
 
-```
-brew upgrade pscale
-```
+Go to the College-ERP folder and run
 
-#### Linux
-
-`pscale` is available as downloadable binaries from the [releases](https://github.com/planetscale/cli/releases/latest) page. Download the .deb or .rpm from the [releases](https://github.com/planetscale/cli/releases/latest) page and install with `sudo dpkg -i` and `sudo rpm -i` respectively.
-
-#### Windows
-
-`pscale` is available via [scoop](https://scoop.sh/), and as a downloadable binary from the [releases](https://github.com/planetscale/cli/releases/latest) page:
-
-```
-scoop bucket add pscale https://github.com/planetscale/scoop-bucket.git
-scoop install pscale mysql
+```bash
+python manage.py runserver
 ```
 
-To upgrade to the latest version:
+Then go to the browser and enter the url **http://127.0.0.1:8000/**
 
-```
-scoop update pscale
-```
 
-#### Manually
+## Login
 
-Download the pre-compiled binaries from the [releases](https://github.com/planetscale/cli/releases/latest) page and copy to the desired location.
+The login page is common for students and teachers.  
+The username is their name and password for everyone is 'project123'.  
 
-Alternatively, you can install [bin](https://github.com/marcosnils/bin) which works on all `macOS`, `Windows`, and `Linux` platforms:
+Example usernames:  
+student- 'samarth'  
+teacher- 'trisila'  
 
-```
-bin install https://github.com/planetscale/cli
-```
+You can access the django admin page at **http://127.0.0.1:8000/admin** and login with username 'admin' and the above password.
 
-To upgrade to the latest version
+Also a new admin user can be created using
 
-```
-bin upgrade pscale
+```bash
+python manage.py createsuperuser
 ```
 
-#### Container images 
+## Users
 
-We provide ready to use Docker container images.  To pull the latest image:
+New students and teachers can be added through the admin page. A new user needs to be created for each. 
 
-```
-docker pull planetscale/pscale:latest
-```
+The admin page is used to modify all tables such as Students, Teachers, Departments, Courses, Classes etc.
 
-To pull a specific version:
 
-```
-docker pull planetscale/pscale:v0.63.0
-```
 
-If you like to have a shell alias that runs the latest version of pscale from docker whenever you type `pscale`:
-
-```
-mkdir -p $HOME/.config/planetscale
-alias pscale="docker run -e HOME=/tmp -v $HOME/.config/planetscale:/tmp/.config/planetscale --user $(id -u):$(id -g) --rm -it -p 3306:3306/tcp planetscale/pscale:latest"
-```
-
-If you need a more advanced example that works with service tokens and differentiates between commands that need a pseudo terminal or non-interactive mode, [have a look at this shell function](https://github.com/jonico/pscale-cli-helper-scripts/blob/main/.pscale/cli-helper-scripts/use-pscale-docker-image.sh).
-
-## GitHub Actions Usage
-Use the [setup-pscale-action](https://github.com/planetscale/setup-pscale-action) to install and use `pscale` in GitHub Actions.
-
-```yaml
-- name: Setup pscale
-  uses: planetscale/setup-pscale-action@v1
-- name: Use pscale
-  env:
-    PLANETSCALE_SERVICE_TOKEN_ID: ${{ secrets.PLANETSCALE_SERVICE_TOKEN_ID }}
-    PLANETSCALE_SERVICE_TOKEN: ${{ secrets.PLANETSCALE_SERVICE_TOKEN }}
-  run: |
-    pscale deploy-request list my-db --org my-org
-```
-
-## Local Development
-
-To run a command:
-```
-go run cmd/pscale/main.go <command>
-```
-
-Alternatively, you can build `pscale`:
-```
-go build cmd/pscale/main.go
-```
-
-And then use the `pscale` binary built in `cmd/pscale/` for testing:
-```
-./cmd/pscale/pscale <command>
-```
-
-## Documentation
-
-Please checkout our Documentation page: [planetscale.com/docs](https://planetscale.com/docs/reference/planetscale-cli)

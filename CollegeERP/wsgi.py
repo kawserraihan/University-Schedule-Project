@@ -17,5 +17,3 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CollegeERP.settings')
 application = get_wsgi_application()
 
 application = WhiteNoise(application)
-
-app = application

@@ -111,7 +111,7 @@ class ClassDetails(models.Model):
     
 class BusDay(models.Model):
     
-    day= models.CharField(max_length=10, null = True)
+    day= models.CharField(max_length=10)
 
     def __str__(self):
         return self.day

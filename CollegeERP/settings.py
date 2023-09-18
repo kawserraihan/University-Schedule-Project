@@ -10,9 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-
-from django.conf import settings
 import os
+from django.conf import settings
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CollegeERP.settings')
 settings.configure()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -28,7 +28,7 @@ SECRET_KEY = 'jy8c-n9y=pf##!2^jae-l_5iafq6q%wfq8gdb6c0r5d52su+9y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app','http://127.0.0.1/','.now.sh']
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'info.User'
 
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
 
-  #  "debug_toolbar.middleware.DebugToolbarMiddleware",
+ #   "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -105,7 +105,6 @@ DATABASES = {
 
 #For the railway id kawser.raihan9898@gmail.com
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -116,6 +115,11 @@ DATABASES = {
         'PORT' : "5516",
         },
     }
+
+
+
+
+
 
 
 # Local DB
@@ -130,37 +134,9 @@ DATABASES = {
         'PORT' : "3306",
         },
     }
-"""
-#Planet Scale
-"""
-DATABASES = {
-  'default': {
-    'ENGINE': 'django_psdb_engine',
-    'NAME': 'college_erp',
-    'HOST': 'aws.connect.psdb.cloud',
-    'PORT': '3306',
-    'USER': 'yv4ssraw70cbnr66dmsy',
-    'PASSWORD': 'pscale_pw_7PFrkKPcojqCEz0pQaQljSP13rRKfZBcaPc2sq8vgK6',
-    'OPTIONS': {'ssl': {'ca': 'cacert-2023-08-22.pem'}, 'charset': 'utf8mb4'}
-  }
-  }
-"""
-
-
-#Render DB
 
 """
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME' : 'college_erp',
-        'USER' : 'root',
-        'PASSWORD' : 'U4Ju4pEkVyTaumnCGXX2im4qKukdMd4a',
-        'HOST' : 'dpg-ck2a4m7qj8ts73839u5g-a.singapore-postgres.render.com',     
-        'PORT' : "5432",
-        },
-    }
-"""
+
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -198,12 +174,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+"""
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'info', 'static'),
 ]
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+"""
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 LOGIN_REDIRECT_URL = '/'
 
@@ -224,4 +200,5 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
 """
