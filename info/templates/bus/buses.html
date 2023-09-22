@@ -22,11 +22,13 @@
 
           </div>
               <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-hover">
                     <thead>
                     <tr>
                       <th>No</th>
+                      <th>   </th>
                       <th>Day</th>
+                      <th>   </th>
                       <th>Action</th>
                     </tr>
                 </thead>
@@ -34,9 +36,13 @@
                     {% for day in day_objects %}
                     <tr>
                     <td>{{ forloop.counter }}</td>
+                    <td>   </td>
                     <td>{{ day.day }}</td>
+                    <td>   </td>
                     <td class="action-buttons">
-                      <button onclick="toggleRoute('{{ day.id }}')">Toggle Route</button>
+                      <button type="button" onclick="toggleRoute('{{ day.id }}')" class="btn btn-outline-primary btn-fw">
+                        Bus Schedules
+                    </button>
                   </td>
                     </tr>
                     {% endfor %}

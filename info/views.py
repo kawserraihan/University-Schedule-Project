@@ -45,11 +45,20 @@ def dashboard(request, teacher_id):
     
     return render(request, 'info/dashboard.html',context)
 
-@login_required
+
+#@login_required
 def classes(request, teacher_id):
+    department_id = request.GET.get('department')
+    batch_id = request.GET.get('batch')
+    section_id = request.GET.get('section')
     # You can retrieve the data for the table from your database here
     # For now, let's create a sample data list for demonstration
-    class_details = ClassDetails.objects.all()
+    class_details = ClassDetails.objects.filter(
+        department_id=department_id,
+        batch_id=batch_id,
+        section_id=section_id
+    )
+
     items_per_page = 10  # Change this to your desired value
 
     # Create a Paginator instance
@@ -67,6 +76,14 @@ def classes(request, teacher_id):
     }
     return render(request, "info/classes.html", context)
 
+
+def all_class_details(request, teacher_id):
+    all_class_details = ClassDetails.objects.all()
+
+    context = {
+        'class_details': all_class_details
+    }
+    return render(request, "info/classes.html", context)
 
 
 def bus_day(request):
@@ -233,6 +250,13 @@ def add_class(request, teacher_id):
     context = {'form': form, 'departments': departments, 'batches': batches, 'sections':sections, 'days_of_week': DAYS_OF_WEEK}
     return render(request, 'info/add_class_form.html', context)
 
+
+def get_departments(request):
+    departments = Dept.objects.all()
+    departments_options = '<option value="">Select a Department</option>'
+    for depts in departments:
+        departments_options += f'<option value="{depts.id}">{depts.name}</option>'
+    return JsonResponse(departments_options, safe=False)
 
 def get_batches(request):
     department_id = request.GET.get('department_id')

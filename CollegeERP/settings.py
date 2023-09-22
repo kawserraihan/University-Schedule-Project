@@ -36,7 +36,7 @@ AUTH_USER_MODEL = 'info.User'
 # Application definition
 
 INSTALLED_APPS = [
-  #  "debug_toolbar",
+    "debug_toolbar",
     'whitenoise.runserver_nostatic',
     'info.apps.InfoConfig',
     'django.contrib.admin',
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
 
- #   "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'CollegeERP.wsgi.application'
 
 # For the railway id kawserraihan2@gmail.com
 
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -101,10 +101,10 @@ DATABASES = {
         'PORT' : "6468",
         },
     }
-"""
+
 
 #For the railway id kawser.raihan9898@gmail.com
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -116,7 +116,7 @@ DATABASES = {
         },
     }
 
-
+"""
 
 
 
@@ -194,11 +194,10 @@ REST_FRAMEWORK = {
     ),
 }
 """
-"""
+
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
     # ...
 ]
 
-"""

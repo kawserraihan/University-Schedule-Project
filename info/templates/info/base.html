@@ -11,6 +11,22 @@
     <title>Students Companion</title>
     <!-- plugins:css -->
     {% load static %}
+
+
+    
+
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Include Bootstrap JavaScript and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+
     <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css'%}">
     <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css'%}">
     
@@ -192,19 +208,20 @@
                 </div>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="dashboard-nav">
               <a class="nav-link" href="{% url 'dashboard' request.user.teacher.id %}" aria-expanded="false">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
-
+            
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'classes' request.user.teacher.id %}" >
-                <span class="menu-title">Classes</span>
-                <i class="mdi mdi-contacts menu-icon"></i>
+              <a class="nav-link" href="#" data-toggle="modal" data-target="#classesModal">
+                  <span class="menu-title">Classes</span>
+                  <i class="mdi mdi-contacts menu-icon"></i>
               </a>
-            </li>
+          </li>
+            
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <span class="menu-title">Bus Schedules</span>
@@ -248,7 +265,112 @@
         <!-- main-panel ends -->
       </div>
       <!-- page-body-wrapper ends -->
+      <div id="classesModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Classes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Add content for your modal here -->
+                    <div class="mb-3 full-width-select">
+                        <label for="department" class="form-label">Department</label>
+                        <select name="department" id="department" class="custom-select">
+                            <option value="">Select Department</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 full-width-select">
+                        <label for="batch" class="form-label">Batch</label>
+                        <select name="batch" id="batch" class="custom-select">
+                            <option value="">Select Batch</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 full-width-select">
+                        <label for="section" class="form-label">Section</label>
+                        <select name="section" id="section" class="custom-select">
+                            <option value="">Select Section</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  
+                  <button id="applyFilterButton" class="btn btn-primary btn-fw" onclick="applyFilter('{{ request.user.teacher.id }}')">Apply Filter</button>
+                  <button id="classesButton" class="btn btn-inverse-primary btn-fw" onclick="redirectToClasses('{{ request.user.teacher.id }}')">All Classes</button> 
+                  <!-- You can add additional buttons if needed -->
+                </div>
+            </div>
+        </div>
     </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function applyFilter(teacherId) {
+          var departmentId = $('#department').val();
+          var batchId = $('#batch').val();
+          var sectionId = $('#section').val();
+      
+          // Construct the URL with the filter parameters
+          var url = `/teacher/${teacherId}/classes/?department=${departmentId}&batch=${batchId}&section=${sectionId}`;
+      
+          // Redirect to the filtered classes page
+          window.location.href = url;
+      
+      }
+      function redirectToClasses(teacherId) {
+        // Construct the URL for the "Classes" page
+        var url = `/teacher/${teacherId}/all_classes/`;
+    
+        // Redirect to the "Classes" page
+        window.location.href = url;
+    }
+      
+
+
+      </script>
+
+    <script>
+    $(document).ready(function () {
+        // Use AJAX to get department options and populate the department dropdown
+        $.ajax({
+            url: "{% url 'get_departments' %}",
+            dataType: "json",
+            success: function (data) {
+                $("#department").html(data);
+            }
+        });
+    
+        // When the department dropdown changes, fetch batches for the selected department
+        $("#department").change(function () {
+            var departmentId = $(this).val();
+            $.ajax({
+                url: "{% url 'get_batches' %}",
+                data: { department_id: departmentId },
+                dataType: "json",
+                success: function (data) {
+                    $("#batch").html(data);
+                }
+            });
+        });
+    
+        // When the batch dropdown changes, fetch sections for the selected batch
+        $("#batch").change(function () {
+            var batchId = $(this).val();
+            $.ajax({
+                url: "{% url 'get_sections' %}",
+                data: { batch_id: batchId },
+                dataType: "json",
+                success: function (data) {
+                    $("#section").html(data);
+                }
+            });
+        });
+    });
+    </script>
+    
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
@@ -267,6 +389,30 @@
     <script src="{% static 'assets/js/dashboard.js'%}"></script>
     <script src="{% static 'assets/js/todolist.js'%}"></script>
     <!-- End custom js for this page -->
-     
+
+  <!--NAV ITEM JS CODE-->
+  <script>
+    // Get the current URL
+    var currentURL = window.location.href;
+    
+    // Select all navigation items
+    var navItems = document.querySelectorAll('.nav-item');
+    
+    // Loop through each navigation item
+    navItems.forEach(function(item) {
+      // Get the href attribute of the link within the navigation item
+      var link = item.querySelector('a');
+      var href = link.getAttribute('href');
+    
+      // Check if the link's href matches the current URL
+      if (currentURL.indexOf(href) !== -1) {
+        // Add the "active" class to the navigation item
+        item.classList.add('active');
+      }
+    });
+    </script>
+    
+
+
   </body>
 </html>

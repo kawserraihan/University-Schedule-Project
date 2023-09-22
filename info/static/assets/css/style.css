@@ -1978,6 +1978,7 @@ svg {
   vertical-align: middle; }
 
 table {
+  
   caption-side: bottom;
   border-collapse: collapse; }
 
@@ -4486,6 +4487,8 @@ textarea.form-control-lg {
     border-color: #3e4b5b; }
 
 .btn-outline-primary {
+  padding: 0.50rem 0.6rem; /* Adjust padding to make the button smaller */
+  font-size: 0.875rem;
   color: #b66dff;
   border-color: #b66dff; }
   .btn-outline-primary:hover {
@@ -14190,7 +14193,7 @@ dl {
         .sidebar .nav .nav-item .nav-link[aria-expanded="true"] .menu-arrow:before {
           content: "\f140"; }
       .sidebar .nav .nav-item.active {
-        background: #ffffff; }
+        background: #f0eded; }
         .sidebar .nav .nav-item.active > .nav-link .menu-title {
           color: #b66dff;
           font-family: "ubuntu-medium", sans-serif; }
@@ -14333,6 +14336,7 @@ dl {
         .sidebar-icon-only .sidebar .nav .nav-item .collapse {
           display: none; }
         .sidebar-icon-only .sidebar .nav .nav-item.hover-open .nav-link .menu-title {
+          color: #b66dff;
           display: -webkit-box;
           display: -ms-flexbox;
           display: flex;
