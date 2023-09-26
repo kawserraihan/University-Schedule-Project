@@ -17,6 +17,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
+              <div class="row">
               <div class="col-md-4">
 
                 <form>
@@ -24,6 +25,23 @@
               
             </form>
           </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="day-filter">Filter by Day:</label>
+              <select name="day" id="day-filter" class="form-control">
+                  <option value="">All Days</option>
+                  <option value="Monday">Monday</option>
+                  <option value="Tuesday">Tuesday</option>
+                  <option value="Wednesday">Wednesday</option>
+                  <option value="Thursday">Thursday</option>
+                  <option value="Friday">Friday</option>
+                  <option value="Saturday">Saturday</option>
+                  <option value="Sunday">Sunday</option>
+              </select>
+          </div>
+        </div>
+      </div>
+
               <div class="table-responsive">
               <table class="table table-hover">
                 <thead>
@@ -75,7 +93,25 @@
         </div>
       </div>
 
-      
+      <script>
+        $(document).ready(function() {
+            // Extract department, batch, section, and teacher ID from the URL
+            var urlParams = new URLSearchParams(window.location.search);
+            var departmentId = urlParams.get('department');
+            var batchId = urlParams.get('batch');
+            var sectionId = urlParams.get('section');
+            var teacherId = urlParams.get('teacher'); // Assuming the parameter name is 'teacher'
+    
+            // Listen for changes in the day filter dropdown
+            $('#day-filter').on('change', function() {
+                var selectedDay = $(this).val();
+                // Construct the URL with the filter parameters
+                var url = `/teacher/${teacherId}/classes/?department=${departmentId}&batch=${batchId}&section=${sectionId}&day=${selectedDay}`;
+                // Redirect to the filtered classes page
+                window.location.href = url;
+            });
+        });
+    </script>
     
   
   <!-- main-panel ends -->

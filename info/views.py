@@ -51,6 +51,8 @@ def classes(request, teacher_id):
     department_id = request.GET.get('department')
     batch_id = request.GET.get('batch')
     section_id = request.GET.get('section')
+    day_filter = request.GET.get('day')
+
     # You can retrieve the data for the table from your database here
     # For now, let's create a sample data list for demonstration
     class_details = ClassDetails.objects.filter(
@@ -58,6 +60,12 @@ def classes(request, teacher_id):
         batch_id=batch_id,
         section_id=section_id
     )
+
+    if day_filter:
+        class_details = class_details.filter(department_id=department_id,
+        batch_id=batch_id,
+        section_id=section_id,
+        day=day_filter)
 
     items_per_page = 10  # Change this to your desired value
 
