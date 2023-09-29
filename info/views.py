@@ -46,20 +46,19 @@ def dashboard(request, teacher_id):
     return render(request, 'info/dashboard.html',context)
 
 
-#@login_required
-def classes(request, teacher_id):
-    department_id = request.GET.get('department')
-    batch_id = request.GET.get('batch')
-    section_id = request.GET.get('section')
+@login_required
+def classes(request, teacher_id, department_id=None, batch_id=None, section_id=None):
+    # Get the day filter from the request GET parameters
     day_filter = request.GET.get('day')
 
-    # You can retrieve the data for the table from your database here
-    # For now, let's create a sample data list for demonstration
-    class_details = ClassDetails.objects.filter(
-        department_id=department_id,
-        batch_id=batch_id,
-        section_id=section_id
-    )
+    # Initialize a queryset to filter ClassDetails based on the provided parameters
+    class_details = ClassDetails.objects.all()
+
+    # Filter by department_id, batch_id, and section_id if provided
+    if department_id & batch_id & section_id is not None:
+        class_details = class_details.filter(department_id=department_id,batch_id=batch_id,section_id=section_id)
+    
+    
 
     if day_filter:
         class_details = class_details.filter(department_id=department_id,
@@ -79,14 +78,23 @@ def classes(request, teacher_id):
     page_obj = paginator.get_page(page_number)
 
     context = {
-        'class_details': class_details,
-        'page_obj': page_obj
+        'class_details': page_obj,  # Use page_obj instead of class_details for pagination
+        'page_obj': page_obj,
+        'teacher_id': teacher_id,  # Pass teacher_id to the template if needed
+        'departmentId': department_id,  # Pass department_id to the template if needed
+        'batchId': batch_id,  # Pass batch_id to the template if needed
+        'sectionId': section_id,  # Pass section_id to the template if needed
     }
     return render(request, "info/classes.html", context)
 
 
 def all_class_details(request, teacher_id):
+
+    day_filter = request.GET.get('day')
     all_class_details = ClassDetails.objects.all()
+
+    if day_filter:
+        all_class_details= all_class_details.filter(day=day_filter)
 
     context = {
         'class_details': all_class_details
@@ -238,9 +246,42 @@ def delete_busschedule(request, busschedule_id):
 
 
 
+@login_required
+def add_class(request, teacher_id, department_id, batch_id, section_id):
+    departments = Dept.objects.all()
+    batches = Batch.objects.all()
+    sections = Section.objects.all()
+
+    # Retrieve the selected department, batch, and section based on URL parameters
+    selected_department = Dept.objects.get(id=department_id)
+    selected_batch = Batch.objects.get(id=batch_id)
+    selected_section = Section.objects.get(id=section_id)
+
+    if request.method == 'POST':
+        form = ClassDetailsForm(request.POST)
+        if form.is_valid():
+            # Save the form data
+            form.save()
+            return redirect('classes', teacher_id=teacher_id, department_id=department_id, batch_id = batch_id, section_id=section_id)
+    else:
+        # Create the form with initial values based on URL parameters
+        form = ClassDetailsForm(initial={
+            'department': selected_department,
+            'batch': selected_batch,
+            'section': selected_section,
+        })
+
+    context = {
+        'form': form,
+        'departments': departments,
+        'batches': batches,
+        'sections': sections,
+        'days_of_week': DAYS_OF_WEEK,
+    }
+    return render(request, 'info/add_class_form.html', context)
 
 @login_required
-def add_class(request, teacher_id):
+def add_class_without_params(request, teacher_id):
     departments = Dept.objects.all()
     batches = Batch.objects.all()
     sections = Section.objects.all()
@@ -251,7 +292,7 @@ def add_class(request, teacher_id):
         if form.is_valid():
             # Save the form data
             form.save()
-            return redirect('classes', teacher_id=teacher_id)
+            return redirect('all_classes', teacher_id=teacher_id)
     else:
         form = ClassDetailsForm()
     
@@ -309,7 +350,7 @@ def delete_class(request, teacher_id, class_id):
     
     if request.method == 'POST':
         class_instance.delete()
-        return redirect('classes', teacher_id=teacher_id)
+        return redirect('all_classes', teacher_id=teacher_id)
     
     context = {'class_id': class_id}
     return render(request, 'info/delete_class.html', context)

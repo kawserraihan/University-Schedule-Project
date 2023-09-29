@@ -308,21 +308,46 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-      function applyFilter(teacherId) {
-          var departmentId = $('#department').val();
-          var batchId = $('#batch').val();
-          var sectionId = $('#section').val();
-      
-          // Construct the URL with the filter parameters
-          var url = `/teacher/${teacherId}/classes/?department=${departmentId}&batch=${batchId}&section=${sectionId}`;
-      
-          // Redirect to the filtered classes page
-          window.location.href = url;
-      
+      // Define a JavaScript variable to store the base URL for the "Filtered Classes" page
+      var filteredClassesPageURL = "{% url 'all_classes' request.user.teacher.id %}"; // Replace all '0's with default values or actual parameter values
+    </script>
+    <script>
+
+      function checkSelections() {
+        var departmentValue = $('#department').val();
+        var batchValue = $('#batch').val();
+        var sectionValue = $('#section').val();
+        
+        // Enable the "Apply Filter" button only if all dropdowns have selected values
+        if (departmentValue && batchValue && sectionValue) {
+          $('#applyFilterButton').prop('disabled', false);
+        } else {
+          $('#applyFilterButton').prop('disabled', true);
+        }
       }
+    
+      // Call the checkSelections function when any of the dropdowns change
+      $("#department, #batch, #section").change(function () {
+        checkSelections();
+      });
+    
+      // Call the checkSelections function initially to set the initial state of the button
+      checkSelections();
+
+      function applyFilter(teacherId) {
+        var departmentId = $('#department').val();
+        var batchId = $('#batch').val();
+        var sectionId = $('#section').val();
+    
+        // Construct the URL with the filter parameters
+        var url = `${filteredClassesPageURL}${departmentId}/${batchId}/${sectionId}/`;
+    
+        // Redirect to the filtered classes page
+        window.location.href = url;
+    }
       function redirectToClasses(teacherId) {
         // Construct the URL for the "Classes" page
-        var url = `/teacher/${teacherId}/all_classes/`;
+        var url = `${filteredClassesPageURL}`;
     
         // Redirect to the "Classes" page
         window.location.href = url;

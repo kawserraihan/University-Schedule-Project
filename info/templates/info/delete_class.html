@@ -9,7 +9,7 @@
 <form action="{% url 'delete_class' teacher_id=request.user.teacher.id class_id=class_id %}" method="post">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Delete</button>
-    <a href="{% url 'classes' teacher_id=request.user.teacher.id %}" class="btn btn-secondary">Cancel</a>
+    <a href="{% url 'all_classes' teacher_id=request.user.teacher.id %}" class="btn btn-secondary">Cancel</a>
 </form>
 
 {% endblock %}

@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'CollegeERP.wsgi.application'
 
 # For the railway id kawserraihan2@gmail.com
 
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -102,9 +102,9 @@ DATABASES = {
         },
     }
 
-
-#For the railway id kawser.raihan9898@gmail.com
 """
+#For the railway id kawser.raihan9898@gmail.com
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -116,7 +116,7 @@ DATABASES = {
         },
     }
 
-"""
+
 
 
 
@@ -136,7 +136,6 @@ DATABASES = {
     }
 
 """
-
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 

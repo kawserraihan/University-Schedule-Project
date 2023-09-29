@@ -21,14 +21,23 @@
               <div class="col-md-4">
 
                 <form>
-                <a href="{% url 'add_class' request.user.teacher.id %}" class="btn btn-gradient-primary btn-fw">Add</a>
-              
-            </form>
+                  {% if departmentId and batchId and sectionId %}
+                    <a href="{% url 'add_class' request.user.teacher.id departmentId batchId sectionId %}" class="btn btn-gradient-primary btn-fw">Add</a>
+                  {% else %}
+                    <a href="{% url 'add_class_without_params' request.user.teacher.id %}" class="btn btn-gradient-primary btn-fw">Add</a>
+                  {% endif %}
+                </form>
           </div>
           <div class="col-md-4">
-            <div class="form-group">
+            <div class="form-group" >
+               <div id="day-filter-container"
+              data-teacher="{{ request.user.teacher.id }}"
+              data-department="{{ departmentId }}"
+              data-batch="{{ batchId }}"
+              data-section="{{ sectionId }}">
               <label for="day-filter">Filter by Day:</label>
               <select name="day" id="day-filter" class="form-control">
+                  <option value="">Select a Day</option>
                   <option value="">All Days</option>
                   <option value="Monday">Monday</option>
                   <option value="Tuesday">Tuesday</option>
@@ -38,6 +47,7 @@
                   <option value="Saturday">Saturday</option>
                   <option value="Sunday">Sunday</option>
               </select>
+            </div>
           </div>
         </div>
       </div>
@@ -95,23 +105,28 @@
 
       <script>
         $(document).ready(function() {
-            // Extract department, batch, section, and teacher ID from the URL
-            var urlParams = new URLSearchParams(window.location.search);
-            var departmentId = urlParams.get('department');
-            var batchId = urlParams.get('batch');
-            var sectionId = urlParams.get('section');
-            var teacherId = urlParams.get('teacher'); // Assuming the parameter name is 'teacher'
-    
-            // Listen for changes in the day filter dropdown
-            $('#day-filter').on('change', function() {
-                var selectedDay = $(this).val();
-                // Construct the URL with the filter parameters
-                var url = `/teacher/${teacherId}/classes/?department=${departmentId}&batch=${batchId}&section=${sectionId}&day=${selectedDay}`;
-                // Redirect to the filtered classes page
-                window.location.href = url;
-            });
+          var dayFilterContainer = $('#day-filter-container');
+          var teacherId = dayFilterContainer.data('teacher');
+          var departmentId = dayFilterContainer.data('department');
+          var batchId = dayFilterContainer.data('batch');
+          var sectionId = dayFilterContainer.data('section');
+      
+          $('#day-filter').on('change', function() {
+            var selectedDay = $(this).val();
+            var url = `/teacher/${teacherId}/classes/${departmentId}/${batchId}/${sectionId}/`;
+      
+            if (selectedDay) {
+              // Append the selected day to the URL if it's not empty
+              url += `?day=${selectedDay}`;
+            }
+      
+            // Redirect to the filtered classes page
+            window.location.href = url;
+          });
         });
-    </script>
+      </script>
+
+
     
   
   <!-- main-panel ends -->
