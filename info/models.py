@@ -1,9 +1,13 @@
+import re
+from django import forms
 from django.db import models
 import math
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save, post_delete
 from datetime import timedelta
+
+from django.forms import ValidationError
 
 
 
@@ -101,14 +105,34 @@ class ClassDetails(models.Model):
     day = models.CharField(max_length=200, default=None)
     classSubject = models.CharField(max_length=200, default=None)
     classRoom = models.CharField(max_length=200, default=None)
-    classStart = models.TimeField(default=None)
-    classEnd = models.TimeField(default=None)
+    classStart = models.CharField(max_length=5, default=None)  # Store as 'HH:MM'
+    classEnd = models.CharField(max_length=5, default=None)
     teacherInit = models.CharField(max_length=50, default=None)
     
 
     def __str__(self):
         return self.classCode
     
+    """
+    def clean_classStart(self):
+        classStart = self.cleaned_data.get('classStart')
+        if not re.match(r'^\d{2}:\d{2}$', classStart):
+            raise forms.ValidationError("Class Start should be in 'HH:MM' format.")
+        return classStart
+    
+    def clean_classEnd(self):
+        classEnd = self.cleaned_data.get('classEnd')
+        if not re.match(r'^\d{2}:\d{2}$', classEnd):
+            raise forms.ValidationError("Class End should be in 'HH:MM' format.")
+        return classEnd
+
+    
+    def save(self, *args, **kwargs):
+        self.clean_classStart(self.classStart)
+        self.clean_classEnd(self.classEnd)
+        super().save(*args, **kwargs)
+
+"""
 class BusDay(models.Model):
     
     day= models.CharField(max_length=10)
@@ -126,7 +150,7 @@ class Route(models.Model):
 class BusSchedule(models.Model):
     day = models.ForeignKey(BusDay, on_delete=models.CASCADE)
     route_type = models.ForeignKey(Route, on_delete=models.CASCADE, null=True, blank=True)
-    time_of_day = models.TimeField()
+    time_of_day = models.CharField(max_length=5, default=None)
     bus_number = models.CharField(max_length=10)
     route_name = models.CharField(max_length=100)
 

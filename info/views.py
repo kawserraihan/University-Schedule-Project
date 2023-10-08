@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.http import HttpResponse
 from .models import *
 from django.urls import reverse
@@ -53,6 +53,8 @@ def classes(request, teacher_id, department_id=None, batch_id=None, section_id=N
 
     # Initialize a queryset to filter ClassDetails based on the provided parameters
     class_details = ClassDetails.objects.all()
+    form = ClassDetailsForm()
+    
 
     # Filter by department_id, batch_id, and section_id if provided
     if department_id & batch_id & section_id is not None:
@@ -67,6 +69,7 @@ def classes(request, teacher_id, department_id=None, batch_id=None, section_id=N
         day=day_filter)
 
     items_per_page = 10  # Change this to your desired value
+    
 
     # Create a Paginator instance
     paginator = Paginator(class_details, items_per_page)
@@ -84,6 +87,8 @@ def classes(request, teacher_id, department_id=None, batch_id=None, section_id=N
         'departmentId': department_id,  # Pass department_id to the template if needed
         'batchId': batch_id,  # Pass batch_id to the template if needed
         'sectionId': section_id,  # Pass section_id to the template if needed
+        'form':form,
+        'DAYS_OF_WEEK': DAYS_OF_WEEK
     }
     return render(request, "info/classes.html", context)
 
@@ -92,12 +97,16 @@ def all_class_details(request, teacher_id):
 
     day_filter = request.GET.get('day')
     all_class_details = ClassDetails.objects.all()
+    form = ClassDetailsForm()
 
     if day_filter:
         all_class_details= all_class_details.filter(day=day_filter)
 
     context = {
-        'class_details': all_class_details
+        'class_details': all_class_details,
+        'form':form,
+        'DAYS_OF_WEEK': DAYS_OF_WEEK,
+        'teacher_id':teacher_id
     }
     return render(request, "info/classes.html", context)
 
@@ -228,57 +237,55 @@ def edit_busschedule(request, busschedule_id):
     return render(request, 'bus/edit_busschedule.html', context)
 
 def delete_busschedule(request, busschedule_id):
-    # Get the BusSchedule object based on the busschedule_id
-    busschedule = get_object_or_404(BusSchedule, pk=busschedule_id)
-
+    busschedule = get_object_or_404(BusSchedule, id = busschedule_id)
     if request.method == 'POST':
-        # Check if the user has confirmed the deletion
-        if request.POST.get('confirm_delete'):
-            # Delete the BusSchedule instance
-            busschedule.delete()
-            return redirect('bus_schedule_list')  # Replace with the appropriate URL name for listing bus schedules
+        #schedule = get_object_or_404(BusSchedule, pk=busschedule_id)
+        busschedule.delete()
+        
+        # Get the routetype and busday_id
+        routetype = busschedule.route_type.route_type  # Replace with the actual way to get routetype
+        busday_id = busschedule.day.id
+        
+        # Construct the URL for redirection using the 'reverse' function
+        redirect_url = reverse('busschedule', kwargs={'routetype': routetype, 'busday_id': busday_id})
+        
+        return HttpResponseRedirect(redirect_url)
     
-    context = {
-        'busschedule': busschedule,
-    }
+    else:
+        return redirect('uproute')
 
-    return render(request, 'bus/delete_busschedule.html', context)
-
+    # Handle cases where the request is not a POST request
+    return redirect('uproute')
 
 
 @login_required
 def add_class(request, teacher_id, department_id, batch_id, section_id):
-    departments = Dept.objects.all()
-    batches = Batch.objects.all()
-    sections = Section.objects.all()
+    try:
+        # Retrieve the selected department, batch, and section based on URL parameters
+        selected_department = get_object_or_404(Dept, id=department_id)
+        selected_batch = get_object_or_404(Batch, id=batch_id)
+        selected_section = get_object_or_404(Section, id=section_id)
 
-    # Retrieve the selected department, batch, and section based on URL parameters
-    selected_department = Dept.objects.get(id=department_id)
-    selected_batch = Batch.objects.get(id=batch_id)
-    selected_section = Section.objects.get(id=section_id)
+        if request.method == 'POST':
+            form = ClassDetailsForm(request.POST)
+            if form.is_valid():
+                # Create the class instance but don't save it yet
+                class_instance = form.save(commit=False)
+                class_instance.department = selected_department
+                class_instance.batch = selected_batch
+                class_instance.section = selected_section
+                class_instance.save()
+                return redirect('classes', teacher_id=teacher_id, department_id=department_id, batch_id=batch_id, section_id=section_id)
+            else:
+                errors = form.errors.as_json()
+                return JsonResponse({'success': False, 'errors': errors})
 
-    if request.method == 'POST':
-        form = ClassDetailsForm(request.POST)
-        if form.is_valid():
-            # Save the form data
-            form.save()
-            return redirect('classes', teacher_id=teacher_id, department_id=department_id, batch_id = batch_id, section_id=section_id)
-    else:
-        # Create the form with initial values based on URL parameters
-        form = ClassDetailsForm(initial={
-            'department': selected_department,
-            'batch': selected_batch,
-            'section': selected_section,
-        })
+        return JsonResponse({'success': False, 'errors': 'Invalid request'})
 
-    context = {
-        'form': form,
-        'departments': departments,
-        'batches': batches,
-        'sections': sections,
-        'days_of_week': DAYS_OF_WEEK,
-    }
-    return render(request, 'info/add_class_form.html', context)
+    except Exception as e:
+        return JsonResponse({'success': False, 'errors': str(e)})
+    
+
 
 @login_required
 def add_class_without_params(request, teacher_id):
@@ -288,16 +295,19 @@ def add_class_without_params(request, teacher_id):
     
     
     if request.method == 'POST':
+        # Rest of your view code here
         form = ClassDetailsForm(request.POST)
         if form.is_valid():
             # Save the form data
             form.save()
-            return redirect('all_classes', teacher_id=teacher_id)
+            return redirect('all_classes', teacher_id=teacher_id )
+        else:
+            errors = form.errors
+            return JsonResponse({'success': False, 'errors': errors})
     else:
-        form = ClassDetailsForm()
-    
-    context = {'form': form, 'departments': departments, 'batches': batches, 'sections':sections, 'days_of_week': DAYS_OF_WEEK}
-    return render(request, 'info/add_class_form.html', context)
+        # Log the request method to help diagnose the issue
+        print(f"Received a {request.method} request instead of a POST request.")
+        return HttpResponseBadRequest("Invalid Request")
 
 
 def get_departments(request):

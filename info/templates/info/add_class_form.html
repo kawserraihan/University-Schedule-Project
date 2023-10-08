@@ -117,27 +117,19 @@
   </style>
 
 
-{% extends 'info/base.html' %}
 {% block content %}
 
 {% load static %}
 
 
-      <div class="page-header">
-        <h3 class="page-title"> Form elements </h3>
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Forms</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Form elements</li>
-          </ol>
-        </nav>
-      </div>
+    
       <div class="row">
             <div class="col-12">              
                   <div class="card">
                         <div class="card-body">
                           <form method="post">
                             {% csrf_token %}
+                          
                               <div class="mb-3 full-width-select">
                                 <label for="{{ form.department.id_for_label }}" class="form-label">Department</label>
                               <div>
@@ -167,10 +159,16 @@
                               <div class="mb-3">
                                 <label for="{{ form.classStart.id_for_label }}" class="form-label">Class Start</label>
                                 {{ form.classStart }}
+                                {% if form.errors.classStart %}
+        <div style="color: red;">{{ form.errors.classStart }}</div>
+    {% endif %}
                               </div>
                               <div class="mb-3">
                                 <label for="{{ form.classEnd.id_for_label }}" class="form-label">Class End</label>
                                 {{ form.classEnd }}
+                                {% if form.errors.classStart %}
+        <div style="color: red;">{{ form.errors.classEnd }}</div>
+    {% endif %}
                               </div>
                               <div class="mb-3">
                                 <label for="{{ form.classSubject.id_for_label }}" class="form-label">Class Subject</label>
@@ -190,6 +188,7 @@
                 </div>
             </div>
             </div>
+            
        
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
 

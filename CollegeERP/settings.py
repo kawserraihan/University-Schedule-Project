@@ -36,7 +36,7 @@ AUTH_USER_MODEL = 'info.User'
 # Application definition
 
 INSTALLED_APPS = [
-  #  "debug_toolbar",
+    "debug_toolbar",        #__________________Django Toolbar________________
     'whitenoise.runserver_nostatic',
     'info.apps.InfoConfig',
     'django.contrib.admin',
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
 
-   # "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",  #__________________Django Toolbar________________
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -104,7 +104,7 @@ DATABASES = {
 
 """
 #For the railway id kawser.raihan9898@gmail.com
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -116,14 +116,24 @@ DATABASES = {
         },
     }
 
+"""
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME' : 'postgres',
+        'USER' : 'postgres',
+        'PASSWORD' : '12345Showmik69.',
+        'HOST' : 'db.dhompekiwmrampqinxzd.supabase.co',     
+        'PORT' : "5432",
+        },
+    }
 
-
-
-
+"""
 
 
 # Local DB
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -135,7 +145,7 @@ DATABASES = {
         },
     }
 
-"""
+
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -193,11 +203,10 @@ REST_FRAMEWORK = {
     ),
 }
 """
-"""
+#__________________Django Toolbar________________
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
     # ...
 ]
 
-"""

@@ -51,12 +51,37 @@
                         <img src="{% static 'assets/images/actions/view.png' %}" alt="Student Companion" /></a>
                       <a href="{% url 'edit_busschedule' buses.id %}">
                         <img src="{% static 'assets/images/actions/edit.png' %}" alt="Student Companion"/></a>
-                      <a href="{% url 'delete_busschedule' buses.id %}">
-                      <img src="{% static 'assets/images/actions/trash.png' %}" alt="Student Companion" /></a>
+                        <a href="#" data-toggle="modal" data-target="#deleteModal{{ buses.id }}">
+                          <img src="{% static 'assets/images/actions/trash.png' %}" alt="delete" />
+                      </a>
 
 
                     </td>
                   </tr>
+                  <!-- Modal for confirming delete -->
+        <div class="modal fade" id="deleteModal{{ buses.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      Are you sure you want to delete this inventory item?
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <!-- Form to submit the delete action with the correct item_id -->
+                      <form method="POST" action="{% url 'delete_busschedule' buses.id %}">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger">Delete</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
                   {% endfor %}
                 </tbody>
               </table>
@@ -67,9 +92,10 @@
       </div>
 
 
-
-
-
+      <script>
+        // JavaScript to show the modal
+        $('#deleteModal').modal('show');
+    </script>
 
   <!-- main-panel ends -->
 

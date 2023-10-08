@@ -32,6 +32,7 @@ class ClassDetailsSerializer(serializers.ModelSerializer):
         model = ClassDetails
     #    fields = ['class_id', 'classcode', 'day', 'classsubject', 'classroom', 'classstart', 'classend', 'teacherinit' ]
         fields = ['classCode', 'day', 'classSubject', 'classRoom', 'classStart', 'classEnd', 'teacherInit' ]
+        
 
 
 

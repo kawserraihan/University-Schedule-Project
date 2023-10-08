@@ -152,6 +152,9 @@
                             <div class="mb-3 full-width-select">
                                 <label for="{{ form.time_of_day.id_for_label }}" class="form-label">Bus Time</label>
                                 {{ form.time_of_day}}
+                                {% if form.errors.time_of_day %}
+        <div style="color: red;">{{ form.errors.time_of_day }}</div>
+    {% endif %}
                               </div>
                               <div class="mb-3">
                                 <label for="{{ form.bus_number.id_for_label }}" class="form-label">Bus Number</label>

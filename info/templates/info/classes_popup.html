@@ -1,0 +1,26 @@
+{% extends 'info/base.html' %}
+{% block content %}
+    
+
+{% load static %}
+
+    <h1>Welcome to the Classes Page</h1>
+    <p>Click the button below to go to the URL:</p>
+    <button id="redirectButton">Go to Classes</button>
+
+    <script>
+        document.getElementById("redirectButton").addEventListener("click", function() {
+            // Redirect to the specified URL when the button is clicked
+            window.location.href = "{% url 'classes' request.user.teacher.id %}";
+        });
+    </script>
+
+
+    {% endblock %}
+
+
+
+
+
+
+
