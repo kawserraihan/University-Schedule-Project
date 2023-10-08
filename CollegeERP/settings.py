@@ -36,7 +36,8 @@ AUTH_USER_MODEL = 'info.User'
 # Application definition
 
 INSTALLED_APPS = [
-    "debug_toolbar",        #__________________Django Toolbar________________
+     #__________________Django Toolbar________________
+  #  "debug_toolbar",       
     'whitenoise.runserver_nostatic',
     'info.apps.InfoConfig',
     'django.contrib.admin',
@@ -53,7 +54,11 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
 
-    "debug_toolbar.middleware.DebugToolbarMiddleware",  #__________________Django Toolbar________________
+
+#__________________Django Toolbar________________
+
+
+   # "debug_toolbar.middleware.DebugToolbarMiddleware",  
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -117,7 +122,7 @@ DATABASES = {
     }
 
 """
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -129,11 +134,11 @@ DATABASES = {
         },
     }
 
-"""
+
 
 
 # Local DB
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -145,7 +150,7 @@ DATABASES = {
         },
     }
 
-
+"""
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -203,10 +208,15 @@ REST_FRAMEWORK = {
     ),
 }
 """
+
+
 #__________________Django Toolbar________________
+
+"""
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
     # ...
 ]
 
+"""
