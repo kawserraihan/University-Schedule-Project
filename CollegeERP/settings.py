@@ -10,8 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
+
+
 import os
 from django.conf import settings
+
+
+
+#-------------------Environtment Setup---------------------------
+
+
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CollegeERP.settings')
 settings.configure()
@@ -22,10 +30,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
+
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'jy8c-n9y=pf##!2^jae-l_5iafq6q%wfq8gdb6c0r5d52su+9y'
 
+
+
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
@@ -33,11 +49,14 @@ ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL = 'info.User'
 
 
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
      #__________________Django Toolbar________________
-  #  "debug_toolbar",       
+   # "debug_toolbar",       
     'whitenoise.runserver_nostatic',
     'info.apps.InfoConfig',
     'django.contrib.admin',
@@ -93,7 +112,13 @@ WSGI_APPLICATION = 'CollegeERP.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-# For the railway id kawserraihan2@gmail.com
+
+
+
+
+#----------------------Railway DB (Email:kawserraihan2@gmail.com)----------------------
+
+
 
 """
 DATABASES = {
@@ -108,7 +133,12 @@ DATABASES = {
     }
 
 """
-#For the railway id kawser.raihan9898@gmail.com
+
+
+#----------------------Railway DB (Email:kawser.raihan9898@gmail.com)---------------------
+
+
+
 """
 DATABASES = {
     'default': {
@@ -122,6 +152,14 @@ DATABASES = {
     }
 
 """
+
+
+
+
+#----------------------Supabase DB (Email:kawserraihan2@gmail.com)----------------------------
+
+
+
 
 DATABASES = {
     'default': {
@@ -137,7 +175,12 @@ DATABASES = {
 
 
 
-# Local DB
+
+#----------------------------------Local Database (XAMP)---------------------------------
+
+
+
+
 """
 DATABASES = {
     'default': {
@@ -151,8 +194,13 @@ DATABASES = {
     }
 
 """
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
+
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -173,6 +221,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
+
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -187,6 +237,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+
+
 STATIC_URL = '/static/'
 """
 STATICFILES_DIRS = [
@@ -196,6 +248,15 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 LOGIN_REDIRECT_URL = '/'
+
+
+
+
+
+#--------------------------Rest Framework Auth--------------------------
+
+
+
 
 """
 REST_FRAMEWORK = {
@@ -210,7 +271,7 @@ REST_FRAMEWORK = {
 """
 
 
-#__________________Django Toolbar________________
+#----------------------Django Toolbar----------------------
 
 """
 INTERNAL_IPS = [
@@ -218,5 +279,4 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
-
 """

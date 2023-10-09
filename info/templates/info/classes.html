@@ -129,17 +129,21 @@
                 {% csrf_token %}
                   <div class="mb-3 full-width-select">
                     <label for="{{ form.department.id_for_label }}" class="form-label">Department</label>
-                  <div>
-                        {{ form.department }}                  
-                  </div>
+                    <select name="department" id="departmentDropDown" class="form-select">
+                      <option value="">Select a Department</option>
+                    </select>
                   </div>
                   <div class="mb-3">
                     <label for="{{ form.batch.id_for_label }}" class="form-label">Batch</label>
-                    {{ form.batch }}
+                    <select name="batch" id="batchDropdown" class="form-select">
+                      <option value="">Select a Batch</option>
+                    </select>
                   </div>
                   <div class="mb-3">
                     <label for="{{ form.section.id_for_label }}" class="form-label">Section</label>
-                    {{ form.section }}
+                    <select name="section" id="sectionDropdown" class="form-select">
+                      <option value="">Select a Section</option>
+                    </select>
                   </div>
                   <div class="mb-3 full-width-select">
                     <label class="form-label">Day</label>
@@ -210,17 +214,21 @@
                   {% csrf_token %}
                   <div class="mb-3 full-width-select">
                     <label for="{{ form.department.id_for_label }}" class="form-label">Department</label>
-                  <div>
-                        {{ form.department }}                  
-                  </div>
+                    <select name="department" id="departmentNoParam" class="form-select">
+                      <option value="">Select a Department</option>
+                    </select>
                   </div>
                   <div class="mb-3">
                     <label for="{{ form.batch.id_for_label }}" class="form-label">Batch</label>
-                    {{ form.batch }}
+                    <select name="batch" id="batchNoParam" class="form-select">
+                      <option value="">Select a Batch</option>
+                    </select>
                   </div>
                   <div class="mb-3">
                     <label for="{{ form.section.id_for_label }}" class="form-label">Section</label>
-                    {{ form.section }}
+                    <select name="section" id="sectionNoParam" class="form-select">
+                      <option value="">Select a Section</option>
+                    </select>
                   </div>
                   <div class="mb-3 full-width-select">
                     <label class="form-label">Day</label>
@@ -305,6 +313,141 @@
        $('#addClassModal').click(openAddClassModal);
        $('#addClassModalNoParam').click(openAddClassModal);
       </script>
+{% comment %} 
+      <script>
+        $(document).ready(function () {
+          // Function to populate the batch dropdown based on the selected department
+          function populateBatchDropdown(departmentId) {
+            $.ajax({
+              url: "{% url 'get_batches' %}",
+              data: { department_id: departmentId },
+              dataType: "json",
+              success: function (data) {
+                var batchDropdown = $("#batchDropdown");
+                batchDropdown.empty();
+                batchDropdown.append('<option value="">Select a Batch</option>');
+                batchDropdown.append(data);
+              },
+              error: function (xhr, textStatus, errorThrown) {
+                console.error(errorThrown);
+              }
+            });
+          }
+      
+          // Function to populate the section dropdown based on the selected batch
+          function populateSectionDropdown(batchId) {
+            $.ajax({
+              url: "{% url 'get_sections' %}",
+              data: { batch_id: batchId },
+              dataType: "json",
+              success: function (data) {
+                var sectionDropdown = $("#sectionDropdown");
+                sectionDropdown.empty();
+                sectionDropdown.append('<option value="">Select a Section</option>');
+                sectionDropdown.append(data);
+              },
+              error: function (xhr, textStatus, errorThrown) {
+                console.error(errorThrown);
+              }
+            });
+          }
+      
+          // Attach an event listener to the department dropdown to update the batch dropdown
+          $("#id_department").change(function () {
+            var departmentId = $(this).val();
+            populateBatchDropdown(departmentId);
+          });
+      
+          // Attach an event listener to the batch dropdown to update the section dropdown
+          $("#batchDropdown").change(function () {
+            var batchId = $(this).val();
+            populateSectionDropdown(batchId);
+          });
+        });
+      </script> {% endcomment %}
+
+      <script>
+        $(document).ready(function () {
+            // Use AJAX to get department options and populate the department dropdown
+            $.ajax({
+                url: "{% url 'get_departments' %}",
+                dataType: "json",
+                success: function (data) {
+                    $("#departmentDropDown").html(data);
+                }
+            });
+        
+            // When the department dropdown changes, fetch batches for the selected department
+            $("#departmentDropDown").change(function () {
+                var departmentId = $(this).val();
+                $.ajax({
+                    url: "{% url 'get_batches' %}",
+                    data: { department_id: departmentId },
+                    dataType: "json",
+                    success: function (data) {
+                        $("#batchDropdown").html(data);
+                    }
+                });
+            });
+        
+            // When the batch dropdown changes, fetch sections for the selected batch
+            $("#batchDropdown").change(function () {
+                var batchId = $(this).val();
+                $.ajax({
+                    url: "{% url 'get_sections' %}",
+                    data: { batch_id: batchId },
+                    dataType: "json",
+                    success: function (data) {
+                        $("#sectionDropdown").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+      <script>
+        $(document).ready(function () {
+            // Use AJAX to get department options and populate the department dropdown
+            $.ajax({
+                url: "{% url 'get_departments' %}",
+                dataType: "json",
+                success: function (data) {
+                    $("#departmentNoParam").html(data);
+                }
+            });
+        
+            // When the department dropdown changes, fetch batches for the selected department
+            $("#departmentNoParam").change(function () {
+                var departmentId = $(this).val();
+                $.ajax({
+                    url: "{% url 'get_batches' %}",
+                    data: { department_id: departmentId },
+                    dataType: "json",
+                    success: function (data) {
+                        $("#batchNoParam").html(data);
+                    }
+                });
+            });
+        
+            // When the batch dropdown changes, fetch sections for the selected batch
+            $("#batchNoParam").change(function () {
+                var batchId = $(this).val();
+                $.ajax({
+                    url: "{% url 'get_sections' %}",
+                    data: { batch_id: batchId },
+                    dataType: "json",
+                    success: function (data) {
+                        $("#sectionNoParam").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+      <!-- JavaScript Script for "add_class_without_param" Modal -->
+     
 {% comment %} 
       <script>
       $(document).ready(function () {
