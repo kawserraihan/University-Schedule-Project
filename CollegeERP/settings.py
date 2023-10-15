@@ -42,7 +42,7 @@ SECRET_KEY = 'jy8c-n9y=pf##!2^jae-l_5iafq6q%wfq8gdb6c0r5d52su+9y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -56,7 +56,7 @@ AUTH_USER_MODEL = 'info.User'
 
 INSTALLED_APPS = [
      #__________________Django Toolbar________________
-    "debug_toolbar",       
+    #"debug_toolbar",       
     'whitenoise.runserver_nostatic',
     'info.apps.InfoConfig',
     'django.contrib.admin',
@@ -77,7 +77,7 @@ MIDDLEWARE = [
 #__________________Django Toolbar________________
 
 
-    "debug_toolbar.middleware.DebugToolbarMiddleware",  
+   # "debug_toolbar.middleware.DebugToolbarMiddleware",  
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -159,7 +159,7 @@ DATABASES = {
 #----------------------Supabase DB (Email:kawserraihan2@gmail.com)----------------------------
 
 
-"""
+
 
 DATABASES = {
     'default': {
@@ -173,14 +173,14 @@ DATABASES = {
     }
 
 
-"""
+
 
 
 #----------------------------------Local Database (XAMP)---------------------------------
 
 
 
-
+"""
 
 DATABASES = {
     'default': {
@@ -194,7 +194,7 @@ DATABASES = {
     }
 
 
-
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -272,10 +272,10 @@ REST_FRAMEWORK = {
 
 #----------------------Django Toolbar----------------------
 
-
+"""
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
     # ...
 ]
-
+"""
