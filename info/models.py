@@ -148,9 +148,9 @@ class Route(models.Model):
     
 
 class BusSchedule(models.Model):
-    day = models.ForeignKey(BusDay, on_delete=models.CASCADE)
+    day = models.ForeignKey(BusDay, on_delete=models.CASCADE, blank=True, null=True)
     route_type = models.ForeignKey(Route, on_delete=models.CASCADE, null=True, blank=True)
-    time_of_day = models.CharField(max_length=5, default=None)
+    time_of_day = models.CharField(max_length=10, default=None, null=True, blank=True)
     bus_number = models.CharField(max_length=10)
     route_name = models.CharField(max_length=100)
 

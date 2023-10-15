@@ -9,7 +9,7 @@ from django.test.client import Client
 
 class InfoTest(TestCase):
 
-    def create_user(self, username='testuser', password='project123'):
+    def create_user(self, username='testuser', password='12345678@'):
         self.client = Client()
         return User.objects.create(username=username, password=password)
 

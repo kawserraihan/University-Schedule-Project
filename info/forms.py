@@ -73,9 +73,3 @@ class BusScheduleForm(forms.ModelForm):
         fields = ['day', 'time_of_day', 'bus_number', 'route_name', 'route_type']
     day_id = forms.IntegerField(widget=forms.HiddenInput(), required=False)
 
-
-    def clean_time_of_day(self):
-        bustime = self.cleaned_data.get('time_of_day')
-        if not re.match(r'^\d{2}:\d{2}$', bustime):
-            raise forms.ValidationError("Bus departure time should be in 'HH:MM' format.")
-        return bustime

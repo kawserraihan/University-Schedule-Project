@@ -120,77 +120,76 @@ def bus_day(request):
         
     return render(request, 'bus/buses.html', context)
 
-
 def busschedule(request, routetype, busday_id):
-    # Determine the routetype_id based on the string captured in the URL
-    if routetype== "uproute":
-        routetype_id = 1
-    elif routetype == "downroute":
-        routetype_id = 2
-    else:
-        routetype_id = 0
-        # Handle other cases or provide a default value
-        routetype_id = 0  # You can change this to an appropriate default value
+    try:
+        # Determine the routetype_id based on the string captured in the URL
+        if routetype == "uproute":
+            routetype_id = 1
+        elif routetype == "downroute":
+            routetype_id = 2
+        else:
+            routetype_id = 0  # Provide a default value
+            # Handle other cases or provide a default value (e.g., routetype_id = 0)
 
-    # Get the BusDay object based on the busday_id
-    bus_day = get_object_or_404(BusDay, pk=busday_id)
+        form = BusScheduleForm()
+        daysdp = BusDay.objects.all()
 
-    # Get the Route object based on the determined routetype_id
-    route = get_object_or_404(Route, pk=routetype_id)
+        # Get the BusDay object based on the busday_id
+        bus_day = get_object_or_404(BusDay, pk=busday_id)
 
-    # Filter BusSchedule objects based on the selected BusDay and Route
-    schedules = BusSchedule.objects.filter(day=bus_day, route_type=route)
+        # Get the Route object based on the determined routetype_id
+        route = get_object_or_404(Route, pk=routetype_id)
 
-    context = {
-        'schedules': schedules,
-        'busday_id': busday_id,
-        'routetype_id': routetype_id,
-        'routetype': routetype
-    }
+        # Filter BusSchedule objects based on the selected BusDay and Route
+        schedules = BusSchedule.objects.filter(day=bus_day, route_type=route)
 
-    return render(request, "bus/busschedule.html", context)
+        context = {
+            'form': form,
+            'schedules': schedules,
+            'bus_day': bus_day,
+            'busday_id': busday_id,
+            'routetype_id': routetype_id,
+            'routetype': routetype,
+            'daysdp':daysdp
+        }
+
+        return render(request, "bus/busschedule.html", context)
+    except Exception as e:
+        # Handle the exception, e.g., log the error or render an error page
+        import traceback
+        traceback.print_exc()
 
 def add_busschedule(request, routetype, busday_id):
-    # Get the BusDay object based on the busday_id
-    bus_day = get_object_or_404(BusDay, pk=busday_id)
+    #bus_day = get_object_or_404(BusDay, pk=busday_id)
     
     # Initialize route_type with a default value
+    busday_id = request.POST.get('busday_id')
     if routetype == "uproute":
         route_type = get_object_or_404(Route, route_type="uproute")
     elif routetype == "downroute":
         route_type = get_object_or_404(Route, route_type="downroute")
     else:
         # Provide a default value for unknown cases
-        route_type = get_object_or_404(Route, route_type="default_value")# Provide a default value for unknown cases
-    
+        route_type = get_object_or_404(Route, route_type="default_value")
     if request.method == 'POST':
         form = BusScheduleForm(request.POST)
         if form.is_valid():
-            # Automatically determine the route_type based on the routetype
-           # routetype = form.cleaned_data['route_type']  # Assuming you have a field named 'route_type' in your form
-
-            # Save the BusSchedule instance with the selected BusDay and route_type
-            busschedule = form.save(commit=False)
-            busschedule.day = bus_day
-            busschedule.route_type = route_type  # Set the route_type
-            busschedule.save()
+            # Save the bus schedule to the database
+            bus_schedule = form.save(commit=False)
+            bus_schedule.day = get_object_or_404(BusDay, pk=busday_id)
+            bus_schedule.route_type = route_type  # Set the route_type
+            bus_schedule.save()
             
-            return redirect('busschedule', routetype=routetype, busday_id=busday_id)
+            # Return a JSON response to indicate success
+            return redirect('busschedule', routetype=route_type, busday_id=busday_id)
+        else:
+            # Return a JSON response with form errors
+            errors = form.errors
+            return JsonResponse({'errors': errors})
     else:
-        # Initialize the form with the selected day
-        form = BusScheduleForm(initial={'day': bus_day.id})
-    
-    # Get all available BusDay objects for the dropdown
-    days = BusDay.objects.all()
+        # Return a JSON response to indicate GET request (not expected)
+        return JsonResponse({'message': 'Invalid request method'}, status=400)
 
-    context = {
-        'form': form,
-        'bus_day': bus_day,
-        'days': days,
-        'route_type': route_type
-    }
-
-    return render(request, "bus/add_bus.html", context)
 
 def view_busschedule(request, routetype, busday_id, busschedule_id):
     # Determine the route_id based on the route type
@@ -215,26 +214,31 @@ def view_busschedule(request, routetype, busday_id, busschedule_id):
     
     return render(request, "bus/view_busschedule.html", context)
 
-def edit_busschedule(request, busschedule_id):
-    # Get the BusSchedule object based on the busschedule_id
+def edit_busschedule(request, routetype, busday_id, busschedule_id):
+    busday = get_object_or_404(BusDay, pk=busday_id)
+    if routetype == "uproute":
+        route_type = get_object_or_404(Route, route_type="uproute")
+    elif routetype == "downroute":
+        route_type = get_object_or_404(Route, route_type="downroute")
+    else:
+        # Provide a default value for unknown cases
+        route_type = get_object_or_404(Route, route_type="default_value")
+
     busschedule = get_object_or_404(BusSchedule, pk=busschedule_id)
 
     if request.method == 'POST':
-        # If the form has been submitted, process the data
-        form = BusScheduleForm(request.POST, instance=busschedule)
+        form = BusScheduleForm(request.POST, instance=busschedule)  # Use the form instance with the existing object
+
         if form.is_valid():
-            form.save()
-            return redirect('view_busschedule', routetype=busschedule.route_type, busday_id=busschedule.day.id, busschedule_id=busschedule.id)
+            form.save()  # This will automatically update the existing object
+            return redirect('busschedule', routetype=route_type.route_type, busday_id=busday_id)
+        else:
+            # Return a JSON response with form errors
+            errors = form.errors
+            return JsonResponse({'errors': errors})
     else:
-        # If it's a GET request, pre-fill the form with existing data
-        form = BusScheduleForm(instance=busschedule)
-
-    context = {
-        'form': form,
-        'busschedule': busschedule,
-    }
-
-    return render(request, 'bus/edit_busschedule.html', context)
+        # Return a JSON response to indicate GET request (not expected)
+        return JsonResponse({'message': 'Invalid request method'}, status=400)
 
 def delete_busschedule(request, busschedule_id):
     busschedule = get_object_or_404(BusSchedule, id = busschedule_id)

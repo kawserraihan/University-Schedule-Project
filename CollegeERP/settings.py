@@ -56,7 +56,7 @@ AUTH_USER_MODEL = 'info.User'
 
 INSTALLED_APPS = [
      #__________________Django Toolbar________________
-   # "debug_toolbar",       
+    "debug_toolbar",       
     'whitenoise.runserver_nostatic',
     'info.apps.InfoConfig',
     'django.contrib.admin',
@@ -77,7 +77,7 @@ MIDDLEWARE = [
 #__________________Django Toolbar________________
 
 
-   # "debug_toolbar.middleware.DebugToolbarMiddleware",  
+    "debug_toolbar.middleware.DebugToolbarMiddleware",  
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -159,7 +159,7 @@ DATABASES = {
 #----------------------Supabase DB (Email:kawserraihan2@gmail.com)----------------------------
 
 
-
+"""
 
 DATABASES = {
     'default': {
@@ -173,7 +173,7 @@ DATABASES = {
     }
 
 
-
+"""
 
 
 #----------------------------------Local Database (XAMP)---------------------------------
@@ -181,7 +181,7 @@ DATABASES = {
 
 
 
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -193,7 +193,6 @@ DATABASES = {
         },
     }
 
-"""
 
 
 
@@ -273,10 +272,10 @@ REST_FRAMEWORK = {
 
 #----------------------Django Toolbar----------------------
 
-"""
+
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
     # ...
 ]
-"""
+

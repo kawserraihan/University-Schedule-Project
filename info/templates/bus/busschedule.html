@@ -1,16 +1,16 @@
 {% extends 'info/base.html' %}
 {% block content %}
-    
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 {% load static %}
-
-
     
       <div class="page-header">
         <h3 class="page-title">
           <span class="page-title-icon bg-gradient-primary text-white me-2">
             <i class="mdi mdi-calendar-multiple-check"></i>
-          </span> Bus Schedules
+          </span> Bus Schedules of {{bus_day}}
         </h3>
       </div>
       <div class="row">
@@ -19,8 +19,10 @@
             <div class="card-body">
               <div class="col-md-4">
                 <form>
-                  <a href="{% url 'add_bus' routetype busday_id %}" id="add-bus-button" class="btn btn-gradient-primary btn-fw">Add</a>
                 
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBusModal" >
+                    Add Busschedule of {{bus_day}}
+                  </button>
               </form>
 
           </div>
@@ -49,8 +51,15 @@
                     <td class="action-buttons">
                       <a href="{% url 'view_busschedule' routetype buses.day.id buses.id %}">
                         <img src="{% static 'assets/images/actions/view.png' %}" alt="Student Companion" /></a>
-                      <a href="{% url 'edit_busschedule' buses.id %}">
-                        <img src="{% static 'assets/images/actions/edit.png' %}" alt="Student Companion"/></a>
+                      {% comment %} <a href="#" data-toggle="modal" data-target="#editBusModal{{ buses.id }}">
+                        <img src="{% static 'assets/images/actions/edit.png' %}" alt="Student Companion"/></a>  {% endcomment %}
+
+                        <button type="button" class="btn btn-primary edit-bus-button" data-toggle="modal" data-target="#editBusModal" 
+  data-day="{{ buses.day }}" data-day-id="{{buses.day.id}}" data-time="{{ buses.time_of_day }}" data-bus-number="{{ buses.bus_number }}" data-route-name="{{ buses.route_name }}" data-bus-id="{{buses.id}}" data-route-type="{{buses.route_type}}" data-route-type-id="{{buses.route_type.id}}">
+  Edit {{buses.route_type.id}}
+</button>
+                        
+                        
                         <a href="#" data-toggle="modal" data-target="#deleteModal{{ buses.id }}">
                           <img src="{% static 'assets/images/actions/trash.png' %}" alt="delete" />
                       </a>
@@ -58,6 +67,45 @@
 
                     </td>
                   </tr>
+                  <!-- Edit Modal -->
+<div class="modal fade" id="editBusModal" tabindex="-1" role="dialog" aria-labelledby="editBusModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editBusModalLabel">Edit Bus</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <!-- Form for editing a Bus -->
+              <form id="editBusForm" method="post" action= "{% url "edit_busschedule" buses.route_type buses.day.id buses.id %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="bus_id" value="{{ buses.id }}">
+                  <input type="hidden" name="day" id="day" value="">
+                  <input type="hidden" name="route_type" value="{{buses.route_type.id}}">
+                  <div class="mb-3">
+                      <label for="time" class="form-label">Time</label>
+                      <input type="text" name="time" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                      <label for="bus_number" class="form-label">Bus Number</label>
+                      <input type="text" name="bus_number" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                      <label for="route_name" class="form-label">Route Name</label>
+                      <input type="text" name="route_name" class="form-control">
+                  </div>
+                  <button type="submit" class="btn btn-second btn-submit">Update</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+                  
+                  
+                  
                   <!-- Modal for confirming delete -->
         <div class="modal fade" id="deleteModal{{ buses.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -82,20 +130,177 @@
               </div>
           </div>
       </div>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-            </div>
-          </div>
+                
+      {% endfor %}
+               
+    </tbody>
+         </table>
         </div>
       </div>
+    </div>
+   </div>
+ </div>
+
+
+ <!-- Add Bus Schedule Modal -->
+
+<div class="modal fade" id="addBusModal" tabindex="-1" role="dialog" aria-labelledby="addBusModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="addBusModalLabel">Add Bus</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <!-- Form for adding a Bus -->
+              
+              <form id="addBusForm" action="{% url 'add_bus' routetype busday_id %}" method="post">
+                
+                
+                {% csrf_token %}
+            
+                  <input type="hidden" name="day_id" value="{{ busday_id }}">
+                  
+                  
+                  <div class="mb-3 full-width-select">
+                      <label for="{{ form.time_of_day.id_for_label }}" class="form-label">Bus Time</label>
+                      {{ form.time_of_day}}
+                      {% if form.errors.time_of_day %}
+<div style="color: red;">{{ form.errors.time_of_day }}</div>
+{% endif %}
+                    </div>
+                    <div class="mb-3">
+                      <label for="{{ form.bus_number.id_for_label }}" class="form-label">Bus Number</label>
+                      {{ form.bus_number }}
+                    </div>
+                    <div class="mb-3">
+                      <label for="{{ form.route_name.id_for_label }}" class="form-label">Route</label>
+                      {{ form.route_name }}
+                    </div>
+       
+                  </div> 
+                
+                
+                  <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+              </form>
+            </div>
+          
+          
+      </div>
+  </div>
+
+
+  
+
+
 
 
       <script>
         // JavaScript to show the modal
         $('#deleteModal').modal('show');
     </script>
+
+    <script>
+      function openAddBusModal(event) {
+        var targetModal = $(event.target).data('target'); // Get the data-target attribute of the clicked button
+        $(targetModal).modal('show'); // Show the modal associated with the clicked button
+     }
+     
+     // Attach click event listeners to the buttons
+     $('#addBusModal').click(openAddBusModal);
+     
+    </script>
+
+    <!-- Add Bootstrap CSS and JS to your template -->
+
+    
+    
+    <!-- Add this script at the end of your HTML body -->
+<script>
+  // Function to get the CSRF token from a cookie
+  function getCSRFToken() {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Check if this cookie name starts with "csrftoken"
+              if (cookie.startsWith('csrftoken=')) {
+                  cookieValue = decodeURIComponent(cookie.substring('csrftoken='.length));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+
+  // JavaScript to open the edit modal and pre-fill the form fields
+  $(document).on('click', '.edit-bus-button', function() {
+      // Get data from the clicked button's data attributes
+      var dayId = $(this).data('day-id');
+      var routeId = $(this).data('route-type-id');
+      var time = $(this).data('time');
+      var busNumber = $(this).data('bus-number');
+      var routeName = $(this).data('route-name');
+      var busId = $(this).data('bus-id'); // Optional: If you need the bus ID
+      var routetype = $(this).data('route-type');
+      var dayId = $(this).data('day-id');
+
+      console.log('hello',routeId);
+
+      
+
+
+      // Pre-fill the form fields in the edit modal
+      //$('#editBusModal input[name="route_type_id"]').val(routeId);
+      $('#editBusModal input[name="day"]').val(dayId);
+      $('#editBusModal input[name="time"]').val(time);
+      $('#editBusModal input[name="bus_number"]').val(busNumber);
+      $('#editBusModal input[name="route_name"]').val(routeName);
+      $('#editBusModal input[name="id"]').val(busId); // Optional: If you need the bus ID
+
+      // Set the form action URL based on the route_type, day_id, and bus_id
+      var form = $('#editBusForm');
+      form.attr('action', '/info/buses/' + routetype + '/' + dayId + '/' + busId + '/edit/');
+
+      // Show the edit modal
+      $('#editBusModal').modal('show');
+  });
+
+  // Example AJAX request with CSRF token
+  $(document).on('submit', '#editBusForm', function(event) {
+      event.preventDefault();
+
+      var csrfToken = getCSRFToken(); // Get the CSRF token
+
+      var formData = $(this).serialize();
+
+      $.ajax({
+          type: 'POST',
+          url: $(this).attr('action'), // Use the form's action URL
+          data: formData,
+          beforeSend: function(xhr) {
+              xhr.setRequestHeader('X-CSRFToken', csrfToken);
+          },
+          success: function(response) {
+              // Handle the response
+              console.log('POST request successful', response);
+              // Optionally, you can close the modal after a successful update
+              $('#editBusModal').modal('hide'); // Close the modal
+              location.reload();
+          },
+          error: function(error) {
+              // Handle errors
+              console.error('POST request error', error);
+          }
+      });
+  });
+</script>
+
+    
+   
 
   <!-- main-panel ends -->
 
