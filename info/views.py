@@ -181,8 +181,8 @@ def add_busschedule(request, routetype, busday_id):
             bus_schedule.save()
             
             # Return a JSON response to indicate success
-            #return redirect('busschedule', routetype=route_type, busday_id=busday_id)
-            return JsonResponse({'message': 'Bus schedule added successfully'})
+            return redirect('busschedule', routetype=route_type, busday_id=busday_id)
+           # return JsonResponse({'message': 'Bus schedule added successfully'})
         else:
             # Return a JSON response with form errors
             errors = form.errors
