@@ -42,7 +42,7 @@ SECRET_KEY = 'jy8c-n9y=pf##!2^jae-l_5iafq6q%wfq8gdb6c0r5d52su+9y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -56,7 +56,7 @@ AUTH_USER_MODEL = 'info.User'
 
 INSTALLED_APPS = [
      #__________________Django Toolbar________________
-    #"debug_toolbar",       
+   # "debug_toolbar",       
     'whitenoise.runserver_nostatic',
     'info.apps.InfoConfig',
     'django.contrib.admin',

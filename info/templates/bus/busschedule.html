@@ -31,10 +31,11 @@
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Day</th>
+                    {% comment %} <th>Day</th> {% endcomment %}
+                    <th>Route</th>
                     <th>Time</th>
                     <th>Bus Number</th>
-                    <th>Route</th>
+                    
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -43,10 +44,11 @@
                   <tr>
 
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ buses.day }}</td>
+                    <td>{{ buses.route_name }}</td>
+                    {% comment %} <td>{{ buses.day }}</td> {% endcomment %}
                     <td>{{ buses.time_of_day }}</td>
                     <td>{{ buses.bus_number }}</td>
-                    <td>{{ buses.route_name }}</td>
+                    
                    
                     <td class="action-buttons">
                       <a href="{% url 'view_busschedule' routetype buses.day.id buses.id %}">
@@ -56,7 +58,7 @@
 
                         <button type="button" class="btn btn-primary edit-bus-button" data-toggle="modal" data-target="#editBusModal" 
   data-day="{{ buses.day }}" data-day-id="{{buses.day.id}}" data-time="{{ buses.time_of_day }}" data-bus-number="{{ buses.bus_number }}" data-route-name="{{ buses.route_name }}" data-bus-id="{{buses.id}}" data-route-type="{{buses.route_type}}" data-route-type-id="{{buses.route_type.id}}">
-  Edit {{buses.route_type.id}}
+  Edit
 </button>
                         
                         
@@ -85,8 +87,8 @@
                   <input type="hidden" name="day" id="day" value="">
                   <input type="hidden" name="route_type" value="{{buses.route_type.id}}">
                   <div class="mb-3">
-                      <label for="time" class="form-label">Time</label>
-                      <input type="text" name="time" class="form-control">
+                      <label for="time_of_day" class="form-label">Time</label>
+                      <input type="text" name="time_of_day" class="form-control">
                   </div>
                   <div class="mb-3">
                       <label for="bus_number" class="form-label">Bus Number</label>
@@ -161,7 +163,8 @@
                 
                 {% csrf_token %}
             
-                  <input type="hidden" name="day_id" value="{{ busday_id }}">
+                  {% comment %} <input type="hidden" name="day_id" value="{{ busday_id }}">
+                  <input type="hidden" name="route_type" value="{{ busses.route_type.id }}"> {% endcomment %}
                   
                   
                   <div class="mb-3 full-width-select">
@@ -256,7 +259,7 @@
       // Pre-fill the form fields in the edit modal
       //$('#editBusModal input[name="route_type_id"]').val(routeId);
       $('#editBusModal input[name="day"]').val(dayId);
-      $('#editBusModal input[name="time"]').val(time);
+      $('#editBusModal input[name="time_of_day"]').val(time);
       $('#editBusModal input[name="bus_number"]').val(busNumber);
       $('#editBusModal input[name="route_name"]').val(routeName);
       $('#editBusModal input[name="id"]').val(busId); // Optional: If you need the bus ID

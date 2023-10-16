@@ -163,7 +163,7 @@ def add_busschedule(request, routetype, busday_id):
     #bus_day = get_object_or_404(BusDay, pk=busday_id)
     
     # Initialize route_type with a default value
-    busday_id = request.POST.get('busday_id')
+    
     if routetype == "uproute":
         route_type = get_object_or_404(Route, route_type="uproute")
     elif routetype == "downroute":
@@ -181,7 +181,8 @@ def add_busschedule(request, routetype, busday_id):
             bus_schedule.save()
             
             # Return a JSON response to indicate success
-            return redirect('busschedule', routetype=route_type, busday_id=busday_id)
+            #return redirect('busschedule', routetype=route_type, busday_id=busday_id)
+            return JsonResponse({'message': 'Bus schedule added successfully'})
         else:
             # Return a JSON response with form errors
             errors = form.errors
